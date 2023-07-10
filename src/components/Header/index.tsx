@@ -1,6 +1,6 @@
 import * as _ from './style';
 import { Link } from 'react-router-dom';
-import { Button, Text, Icon, theme } from '@team-entry/design_system';
+import { Button, Text, Icon, theme, Stack } from '@team-entry/design_system';
 import { useState } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import Logo from '../../assets/Logo.svg';
@@ -27,12 +27,14 @@ const Header = () => {
   return (
     <>
       <_._HeaderContainer>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link onClick={() => setVisibility(false)} to="/" style={{ display: 'flex' }}>
-            <img src={Logo} alt="" style={{ marginRight: 12, cursor: 'pointer' }} />
-            <Text color="realBlack" size="title1">
-              EntryDSM 입학전형
-            </Text>
+        <Stack align="center">
+          <Link onClick={() => setVisibility(false)} to="/">
+            <Stack>
+              <img src={Logo} alt="" style={{ marginRight: 12, cursor: 'pointer' }} />
+              <Text color="realBlack" size="title1">
+                EntryDSM 입학전형
+              </Text>
+            </Stack>
           </Link>
           <_._Texts>
             {headerList.map((res, idx) => {
@@ -46,13 +48,13 @@ const Header = () => {
               );
             })}
           </_._Texts>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        </Stack>
+        <Stack align="center">
           <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
             김이름
           </Text>
           <Icon cursor="pointer" icon="DownArrow" color="black500" />
-        </div>
+        </Stack>
       </_._HeaderContainer>
       <Outlet />
     </>

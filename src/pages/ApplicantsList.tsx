@@ -8,6 +8,8 @@ import PageNation from '@/components/PageNation';
 import { SideBar } from '@/components/SideBar';
 import { StudentInfo } from '@/components/StudentInfo';
 
+const headText = ['접수번호', '이름', '지역', '전형', '원서 제출 상태', '최종제출'];
+
 const ApplicantsList = () => {
   const [filter, setFilter] = useState<IApplicationListRequest>({
     size: 10,
@@ -112,24 +114,11 @@ const ApplicantsList = () => {
         />
       </_CheckBoxs>
       <_THead>
-        <Text align="center" width={110} color="black700" size="body1">
-          접수번호
-        </Text>
-        <Text align="center" width={110} color="black700" size="body1">
-          이름
-        </Text>
-        <Text align="center" width={110} color="black700" size="body1">
-          지역
-        </Text>
-        <Text align="center" width={110} color="black700" size="body1">
-          전형
-        </Text>
-        <Text align="center" width={110} color="black700" size="body1">
-          원서 제출 상태
-        </Text>
-        <Text align="center" width={110} color="black700" size="body1">
-          최종제출
-        </Text>
+        {headText.map((text) => (
+          <Text align="center" width={110} color="black700" size="body1">
+            {text}
+          </Text>
+        ))}
       </_THead>
       {application_list?.applicants.map((applicant, idx) => (
         <_TBody
@@ -187,9 +176,8 @@ const _Wrapper = styled.div`
   align-items: start;
   max-width: 65rem;
   width: 100%;
-  margin: 0 auto;
+  margin: 7rem auto 0 auto;
   padding: 0 20px 200px 20px;
-  margin-top: 7rem;
 `;
 
 const _CheckBoxs = styled.div`

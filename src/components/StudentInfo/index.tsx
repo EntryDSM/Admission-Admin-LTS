@@ -2,7 +2,7 @@ import { getApplicantDetail } from '@/utils/api/admin';
 import { regex } from '@/utils/regex';
 import { applicationTypeToKorean, educationStatusTypeToKorean } from '@/utils/translate';
 import styled from '@emotion/styled';
-import { Button, HStack, Text, VStack } from '@team-entry/design_system';
+import { Button, HStack, Text, theme, VStack } from '@team-entry/design_system';
 import { useState } from 'react';
 
 interface IPropsType {
@@ -265,7 +265,7 @@ const HR = styled.hr`
   margin: 20px 0;
   width: 100%;
   height: 1px;
-  background-color: #e6e6e6;
+  background-color: ${theme.color.black100};
 `;
 
 const Grid = styled.div`

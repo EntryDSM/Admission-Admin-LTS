@@ -78,7 +78,7 @@ export const editApplicationCount = () => {
 };
 
 /** 유형별 인원 가져오기 */
-export const getApplicationCount = (options?: UseQueryOptions) => {
+export const getApplicationCount = () => {
   const response = async () => {
     const { data } = await instance.get(`${router}/application-count`);
     return data;

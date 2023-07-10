@@ -11,8 +11,8 @@ export const _HeaderContainer = styled.div`
   left: 0;
   width: 100vw;
   height: 4rem;
-  border-bottom: 1px solid #e6e6e6;
-  background-color: #ffffff;
+  border-bottom: 1px solid ${theme.color.black100};
+  background-color: ${theme.color.realWhite};
   z-index: 100;
 `;
 
