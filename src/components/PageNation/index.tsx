@@ -47,7 +47,7 @@ const _Buttons = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-  margin: 50px auto 0 auto;
+  margin: 50px auto 0;
 `;
 
 const _Button = styled.div<{ clicked?: boolean }>`
