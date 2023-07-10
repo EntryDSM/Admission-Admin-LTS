@@ -183,9 +183,8 @@ const _Wrapper = styled.div`
   align-items: start;
   max-width: 75rem;
   width: 100%;
-  margin: 0 auto;
+  margin: 7rem auto 0 auto;
   padding: 0 20px 200px 20px;
-  margin-top: 7rem;
 `;
 
 const _THead = styled.div`

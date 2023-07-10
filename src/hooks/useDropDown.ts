@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-export const useDropDown = <T extends unknown[][]>(initialForm: T) => {
+export const useDropDown = <T extends string[][]>(initialForm: T) => {
   const [form, setForm] = useState<T>(initialForm);
   const onChange = useCallback((index: number[], value: string) => {
     const copy = [...form];
