@@ -1,32 +1,116 @@
+import { getSchedule } from '@/utils/api/schedule';
 import { Text } from '@team-entry/design_system';
 import * as _ from './style';
 
-const progressState = [
-  { id: 0, title: '원서 제출', date: '10/17~10/20' },
-  { id: 1, title: '1차 발표', date: '10/24 18:00' },
-  { id: 2, title: '원서 제출', date: '10/18 9:00' },
-  { id: 3, title: '2차 발표', date: '11/03 10:00' },
-];
-
 const ProgressBar = () => {
-  const DATE = 1;
+  const { data, isLoading } = getSchedule();
+  const currentDate = new Date('2022-11-10');
+  const startDate = new Date(data?.schedules[0].date ?? '');
+  const endDate = new Date(data?.schedules[1].date ?? '');
+  const firstAnnouncementDate = new Date(data?.schedules[2].date ?? '');
+  const interviewDate = new Date(data?.schedules[3].date ?? '');
+  const secondAnnouncementDate = new Date(data?.schedules[4].date ?? '');
+
+  if (isLoading) {
+    return '';
+  }
+
+  const progressState = [
+    {
+      title: '원서 제출',
+      date: `${startDate.getMonth() + 1}/${startDate.getDate()}~${endDate.getMonth() + 1}/${endDate.getDate()}`,
+      condition: startDate <= currentDate && currentDate <= endDate,
+    },
+    {
+      title: '1차 발표',
+      date: `${
+        firstAnnouncementDate.getMonth() + 1
+      }/${firstAnnouncementDate.getDate()} ${firstAnnouncementDate.getHours()}/${firstAnnouncementDate
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}`,
+      condition: firstAnnouncementDate <= currentDate && currentDate < interviewDate,
+    },
+    {
+      title: '심층 면접',
+      date: `${interviewDate.getMonth() + 1}/${interviewDate.getDate()} ${interviewDate.getHours()}/${interviewDate
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}`,
+      condition: interviewDate <= currentDate && currentDate <= secondAnnouncementDate,
+    },
+    {
+      title: '2차 발표',
+      date: `${
+        secondAnnouncementDate.getMonth() + 1
+      }/${secondAnnouncementDate.getDate()} ${secondAnnouncementDate.getHours()}/${secondAnnouncementDate
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}`,
+      condition: secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3,
+    },
+  ];
+
+  console.log(currentDate >= startDate);
+  console.log(currentDate, endDate);
 
   const progressBar = [
-    { id: 0, element: <_._ProgressCircle now={0 <= DATE} /> },
-    { id: 1, element: <_._ProgressStep now={1 <= DATE} /> },
-    { id: 2, element: <_._ProgressCircle now={1 <= DATE} /> },
-    { id: 3, element: <_._ProgressStep now={2 <= DATE} /> },
-    { id: 4, element: <_._ProgressCircle now={2 <= DATE} /> },
-    { id: 5, element: <_._ProgressStep now={3 <= DATE} /> },
-    { id: 6, element: <_._ProgressCircle now={3 <= DATE} /> },
+    {
+      element: (
+        <_._ProgressCircle
+          now={startDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+        />
+      ),
+    },
+    {
+      element: (
+        <_._ProgressStep now={endDate < currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3} />
+      ),
+    },
+
+    {
+      element: (
+        <_._ProgressCircle
+          now={firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+        />
+      ),
+    },
+    {
+      element: (
+        <_._ProgressStep
+          now={interviewDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+        />
+      ),
+    },
+    {
+      element: (
+        <_._ProgressCircle
+          now={interviewDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+        />
+      ),
+    },
+    {
+      element: (
+        <_._ProgressStep
+          now={secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+        />
+      ),
+    },
+    {
+      element: (
+        <_._ProgressCircle
+          now={secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+        />
+      ),
+    },
   ];
 
   return (
     <_._Overflow>
       <_._Progress>
         <_._ProgressCards>
-          {progressState.map((state) => (
-            <_._ProgressCard key={state.id} now={state.id <= DATE}>
+          {progressState.map((state, idx) => (
+            <_._ProgressCard key={idx} now={state.condition}>
               <Text color="realWhite" size="title1">
                 {state.title}
               </Text>

@@ -44,9 +44,9 @@ const EditScreenSchedule = () => {
     }
   };
 
-  useEffect(() => {
-    setStartDropDown((prev) => [...prev]);
-  }, [startDropDown]);
+  // useEffect(() => {
+  //   setStartDropDown((prev) => [...prev]);
+  // }, [startDropDown]);
 
   return (
     <_Wrapper>
