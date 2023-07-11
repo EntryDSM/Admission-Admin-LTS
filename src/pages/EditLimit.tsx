@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Input, Stack, Text, theme } from '@team-entry/design_system';
-import { editApplicationCount, getApplicationCount, getStaticCounts } from '@/utils/api/admin';
-import { useInput } from '@/hooks/useInput';
+import {
+  Button, Input, Stack, Text, theme,
+} from '@team-entry/design_system';
 import { useQueryClient } from 'react-query';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { editApplicationCount, getApplicationCount, getStaticCounts } from '@/utils/api/admin';
+import { useInput } from '@/hooks/useInput';
 
-const EditLimit = () => {
+function EditLimit() {
   const { mutate } = editApplicationCount();
   const [state, setState] = useState({
     commonDaejeon: '',
@@ -142,23 +144,23 @@ const EditLimit = () => {
         </_Text>
         <_Inputs>
           <Text color="black900" size="title1" width={200}>
-            {+form.commonDaejeon + +form.commonNationWide + '명'}
+            {`${+form.commonDaejeon + +form.commonNationWide}명`}
           </Text>
           <Text color="black900" size="title1" width={200}>
-            {+form.meisterDajeon + +form.meisterNationWide + '명'}
+            {`${+form.meisterDajeon + +form.meisterNationWide}명`}
           </Text>
           <Text color="black900" size="title1" width={200}>
-            {+form.socialDaejeon + +form.socialNationWide + '명'}
+            {`${+form.socialDaejeon + +form.socialNationWide}명`}
           </Text>
         </_Inputs>
         <_Total color="black900" size="title1" width={200}>
-          {+form.commonDaejeon +
-            +form.commonNationWide +
-            +form.meisterDajeon +
-            +form.meisterNationWide +
-            +form.socialDaejeon +
-            +form.socialNationWide +
-            '명'}
+          {`${+form.commonDaejeon
+            + +form.commonNationWide
+            + +form.meisterDajeon
+            + +form.meisterNationWide
+            + +form.socialDaejeon
+            + +form.socialNationWide
+          }명`}
         </_Total>
       </_TBody>
       <Stack margin={['top', 20]} gap={10}>
@@ -173,7 +175,7 @@ const EditLimit = () => {
       </Stack>
     </_Wrapper>
   );
-};
+}
 
 export default EditLimit;
 
