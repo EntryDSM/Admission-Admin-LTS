@@ -2,11 +2,13 @@
   "name": "entry-admission-lts",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky install",
+    "lint": "npx eslint --ext .tsx --ext .ts .",
+    "lint:fix": "npx eslint --ext .tsx --ext .ts . --fix"
   },
   "dependencies": {
     "@emotion/core": "^11.0.0",
@@ -39,8 +41,17 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
     "vite-tsconfig-paths": "^4.0.8"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

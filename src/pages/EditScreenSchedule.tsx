@@ -8,6 +8,8 @@ import { editSchedule, getSchedule } from '@/utils/api/schedule';
 
 const scheduleType = ['START_DATE', 'FIRST_ANNOUNCEMENT', 'INTERVIEW', 'SECOND_ANNOUNCEMENT', 'END_DATE'];
 
+const screenScheduleProgress = ['원서 제출', '1차 발표', '심층 면접', '최종발표'];
+
 const EditScreenSchedule = () => {
   const { mutate } = editSchedule();
   const { data } = getSchedule();
@@ -43,8 +45,8 @@ const EditScreenSchedule = () => {
   };
 
   useEffect(() => {
-    setStartDropDown((prev) => ([...prev, ]))
-  }, [startDropDown])
+    setStartDropDown((prev) => [...prev]);
+  }, [startDropDown]);
 
   return (
     <_Wrapper>
@@ -59,18 +61,11 @@ const EditScreenSchedule = () => {
       </_ProgressWrapper>
       <_Table>
         <_THead>
-          <Text display="flex" color="black900" size="title1" width={200}>
-            원서 제출
-          </Text>
-          <Text display="flex" color="black900" size="title1" width={200}>
-            1차 발표
-          </Text>
-          <Text display="flex" color="black900" size="title1" width={200}>
-            심층 면접
-          </Text>
-          <Text display="flex" color="black900" size="title1" width={200}>
-            최종발표
-          </Text>
+          {screenScheduleProgress.map((progressName) => (
+            <Text display="flex" color="black900" size="title1" width={200}>
+              {progressName}
+            </Text>
+          ))}
         </_THead>
         <_TBody>
           <Text width={200} color="black900" size="title1">
@@ -149,9 +144,8 @@ const _Wrapper = styled.div`
   align-items: start;
   max-width: 65rem;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 20px 200px 20px;
-  margin-top: 7rem;
+  margin: 7rem auto 0;
+  padding: 0 20px 200px;
   gap: 25px;
 `;
 

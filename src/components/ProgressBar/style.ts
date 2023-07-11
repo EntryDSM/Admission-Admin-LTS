@@ -10,9 +10,6 @@ export const _Progress = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media screen and (max-width: 768px) {
-    margin-top: 4rem;
-  }
 `;
 
 export const _ProgressCards = styled.div`
