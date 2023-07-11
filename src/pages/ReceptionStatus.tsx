@@ -1,11 +1,29 @@
 import styled from '@emotion/styled';
-import { Text, theme } from '@team-entry/design_system';
+import { Text, VStack, theme } from '@team-entry/design_system';
 import { CommonScoreCard } from '@/components/CommonScoreCard';
 import { SpecialScoreCard } from '@/components/SpecialScoreCard';
-import { getStaticsScore } from '@/utils/api/admin';
+import { getApplicationCount, getStaticCounts, getStaticsScore } from '@/utils/api/admin';
 
 function ReceptionStatus() {
-  const { data } = getStaticsScore();
+  const { data: staticsScoreData } = getStaticsScore();
+  const { data: staticCountsData } = getStaticCounts();
+  const { data: applicationCountData } = getApplicationCount();
+
+  const everyCommon = staticCountsData?.[0].count ?? 0;
+  const daejeonCommon = staticCountsData?.[1].count ?? 0;
+  const everyMeister = staticCountsData?.[2].count ?? 0;
+  const daejeonMeister = staticCountsData?.[3].count ?? 0;
+  const everySocial = staticCountsData?.[4].count ?? 0;
+  const daejeonSocial = staticCountsData?.[5].count ?? 0;
+  const allReception = everyCommon + everyMeister + everySocial + daejeonCommon + daejeonMeister + daejeonSocial;
+
+  const allCommon = (applicationCountData?.[0].count ?? 25) + (applicationCountData?.[3].count ?? 25);
+  const allMeister = (applicationCountData?.[1].count ?? 6) + (applicationCountData?.[2].count ?? 6);
+  const allSocial = (applicationCountData?.[4].count ?? 1) + (applicationCountData?.[5].count ?? 1);
+
+  const commonPercent = +((everyCommon + daejeonCommon) / allCommon).toFixed(2);
+  const meisterPercent = +((everyMeister + daejeonMeister) / allMeister).toFixed(2);
+  const socialPercent = +((everySocial + daejeonSocial) / allSocial).toFixed(2);
 
   return (
     <_Wrapper>
@@ -17,72 +35,61 @@ function ReceptionStatus() {
           총 지원자 수:
         </Text>
         <Text color="black900" size="title1">
-          44명
+          {allReception}명
         </Text>
         <Text color="black900" size="title3" margin={[0, 0, 0, 4]}>
           총 경쟁률:
         </Text>
         <Text color="black900" size="title1">
-          0.6 : 1
+          {(allReception / (allCommon + allMeister + allSocial)).toFixed(2)} : 1
         </Text>
       </_StatusCount>
       <Text color="black900" size="header2">
         신입생 전형유형별 지원률
       </Text>
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
-      }}
-      >
+
+      <_GraphWrapper>
         <Text width={80} align="start" size="body1" color="black900">
           일반
         </Text>
-        <_Application>
-          <_ApplicationRate>
-            <Text margin={[0, 0, 0, 12]} color="realWhite" size="body1">
-              24명(총 50명)
-            </Text>
-          </_ApplicationRate>
+        <_Application percent={commonPercent * 100}>
+          <_ApplicationText margin={[0, 0, 0, 12]} color="realWhite" size="body1">
+            {`${everyCommon + daejeonCommon}명 (총 ${allCommon}명)`}
+          </_ApplicationText>
         </_Application>
         <Text width={80} align="start" size="body1" color="black900">
-          0.48 : 1
+          {commonPercent} : 1
         </Text>
-      </div>
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
-      }}
-      >
+      </_GraphWrapper>
+
+      <_GraphWrapper>
         <Text width={80} align="start" size="body1" color="black900">
           마이스터
         </Text>
-        <_Application>
-          <_ApplicationRate>
-            <Text margin={[0, 0, 0, 12]} color="realWhite" size="body1">
-              24명(총 50명)
-            </Text>
-          </_ApplicationRate>
+        <_Application percent={meisterPercent * 100}>
+          <_ApplicationText margin={[0, 0, 0, 12]} color="realWhite" size="body1">
+            {`${everyMeister + daejeonMeister}명 (총 ${allMeister}명)`}
+          </_ApplicationText>
         </_Application>
         <Text width={80} align="start" size="body1" color="black900">
-          0.6 : 1
+          {meisterPercent} : 1
         </Text>
-      </div>
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',
-      }}
-      >
+      </_GraphWrapper>
+
+      <_GraphWrapper>
         <Text width={80} align="start" size="body1" color="black900">
           사회통합
         </Text>
-        <_Application>
-          <_ApplicationRate>
-            <Text margin={[0, 0, 0, 12]} color="realWhite" size="body1">
-              24명(총 50명)
-            </Text>
-          </_ApplicationRate>
+        <_Application percent={socialPercent * 100}>
+          <_ApplicationText margin={[0, 0, 0, 12]} color="realWhite" size="body1">
+            {`${everySocial + daejeonSocial}명 (총 ${allSocial}명)`}
+          </_ApplicationText>
         </_Application>
         <Text width={80} align="start" size="body1" color="black900">
-          0.6 : 1
+          {socialPercent} : 1
         </Text>
-      </div>
+      </_GraphWrapper>
+
       <div style={{ width: '100%' }}>
         <Text color="black900" size="header2" margin={[0, 0, 20, 0]}>
           분야 및 지역별 경쟁률
@@ -93,13 +100,13 @@ function ReceptionStatus() {
               대전
             </Text>
             <Text color="black900" size="title3">
-              일반전형:
+              일반전형: {+(daejeonCommon / (applicationCountData?.[0].count ?? 25)).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              마이스터 전형:
+              마이스터 전형: {+(daejeonMeister / (applicationCountData?.[1].count ?? 6)).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              사회통합 전형:
+              사회통합 전형: {+(daejeonSocial / (applicationCountData?.[4].count ?? 1)).toFixed(2)} : 1
             </Text>
           </_CompetitionRate>
           <_CompetitionRate>
@@ -107,13 +114,13 @@ function ReceptionStatus() {
               전국
             </Text>
             <Text color="black900" size="title3">
-              일반전형:
+              일반전형: {+(everyCommon / (applicationCountData?.[3].count ?? 25)).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              마이스터 전형:
+              마이스터 전형: {+(everyMeister / (applicationCountData?.[2].count ?? 6)).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              사회통합 전형:
+              사회통합 전형: {+(everySocial / (applicationCountData?.[5].count ?? 1)).toFixed(2)} : 1
             </Text>
           </_CompetitionRate>
         </div>
@@ -125,20 +132,20 @@ function ReceptionStatus() {
         <CommonScoreCard
           title="일반 전형"
           ranges={['158~170', '145~157', '132~144', '119~131', '106~118', '93-105', '80-92', '-70']}
-          daejeonRanges={data?.[0]}
-          nationWideRanges={data?.[1]}
+          daejeonRanges={staticsScoreData?.[0]}
+          nationWideRanges={staticsScoreData?.[1]}
         />
         <SpecialScoreCard
           title="마이스터 전형"
           ranges={['98-110', '85-97', '72-84', '59-71', '46-58', '33-45', '20-32', '-19']}
-          daejeonRanges={data?.[2]}
-          nationWideRanges={data?.[3]}
+          daejeonRanges={staticsScoreData?.[2]}
+          nationWideRanges={staticsScoreData?.[3]}
         />
         <SpecialScoreCard
           title="사회통합 전형"
           ranges={['98-110', '85-97', '72-84', '59-71', '46-58', '33-45', '20-32', '-19']}
-          daejeonRanges={data?.[4]}
-          nationWideRanges={data?.[5]}
+          daejeonRanges={staticsScoreData?.[4]}
+          nationWideRanges={staticsScoreData?.[5]}
         />
       </div>
     </_Wrapper>
@@ -168,21 +175,35 @@ const _StatusCount = styled.div`
   border-radius: 10px;
 `;
 
-const _Application = styled.div`
+const _GraphWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const _Application = styled.div<{ percent: number }>`
   position: relative;
+  display: flex;
+  align-items: center;
   width: 80%;
   height: 45px;
   background-color: ${theme.color.green100};
   border-radius: 8px;
   overflow: hidden;
+  ::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: ${({ percent }) => percent}%;
+    height: 45px;
+    background-color: ${theme.color.green500};
+    border-radius: 8px;
+  }
 `;
 
-const _ApplicationRate = styled.div`
-  display: flex;
-  align-items: center;
-  width: 70%;
-  height: 45px;
-  background-color: ${theme.color.green500};
+const _ApplicationText = styled(Text)`
+  z-index: 10;
 `;
 
 const _CompetitionRate = styled.div`
