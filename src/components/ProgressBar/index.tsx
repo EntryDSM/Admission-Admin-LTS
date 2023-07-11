@@ -12,7 +12,7 @@ const ProgressBar = () => {
   const secondAnnouncementDate = new Date(data?.schedules[4].date ?? '');
 
   if (isLoading) {
-    return '';
+    return <></>;
   }
 
   const progressState = [
