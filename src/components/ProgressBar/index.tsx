@@ -4,12 +4,12 @@ import * as _ from './style';
 
 const ProgressBar = () => {
   const { data, isLoading } = getSchedule();
-  const currentDate = new Date('2022-11-10');
-  const startDate = new Date(data?.schedules[0].date ?? '');
-  const endDate = new Date(data?.schedules[1].date ?? '');
-  const firstAnnouncementDate = new Date(data?.schedules[2].date ?? '');
-  const interviewDate = new Date(data?.schedules[3].date ?? '');
-  const secondAnnouncementDate = new Date(data?.schedules[4].date ?? '');
+  const currentDate = new Date();
+  const startDate = new Date(data?.schedules[0]?.date ?? '');
+  const endDate = new Date(data?.schedules[1]?.date ?? '');
+  const firstAnnouncementDate = new Date(data?.schedules[2]?.date ?? '');
+  const interviewDate = new Date(data?.schedules[3]?.date ?? '');
+  const secondAnnouncementDate = new Date(data?.schedules[4]?.date ?? '');
 
   if (isLoading) {
     return <></>;
