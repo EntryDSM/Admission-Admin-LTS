@@ -180,6 +180,7 @@ const _Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   margin-top: 7rem;
+  margin-bottom: 7rem;
   gap: 25px;
 `;
 
