@@ -14,7 +14,7 @@ interface IHeaderList {
 }
 
 const headerList: IHeaderList[] = [
-  { name: '전형 일정 수정', url: '/screenSchedule' },
+  // { name: '전형 일정 수정', url: '/screenSchedule' },
   { name: '접수 현황', url: '/receptionStatus' },
   { name: '정원 수정', url: '/limit' },
   { name: '지원자 목록', url: '/applicantsList' },
