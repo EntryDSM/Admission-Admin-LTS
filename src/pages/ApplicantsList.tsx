@@ -163,7 +163,7 @@ const ApplicantsList = () => {
       >
         <StudentInfo receiptCode={receiptCode} />
       </SideBar>
-      <PageNation />
+      {/* <PageNation /> */}
     </_Wrapper>
   );
 };
