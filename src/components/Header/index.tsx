@@ -51,7 +51,7 @@ const Header = () => {
         </Stack>
         <Stack align="center">
           <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
-            김이름
+            어드민
           </Text>
           <Icon cursor="pointer" icon="DownArrow" color="black500" />
         </Stack>
