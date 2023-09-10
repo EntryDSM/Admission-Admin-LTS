@@ -93,7 +93,7 @@ const Home = () => {
         <Text width={80} align="start" size="body1" color="black900">
           총
         </Text>
-        <_Application percent={0.05 * 100}>
+        <_Application percent={((allCommon + allMeister + allSocial) / allReception) * 100}>
           <_ApplicationText margin={[0, 0, 0, 12]} color="realWhite" size="body1">
             {`${allReception}명 (총 ${allCommon + allMeister + allSocial}명)`}
           </_ApplicationText>
