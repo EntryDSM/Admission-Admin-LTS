@@ -26,8 +26,8 @@ const Home = () => {
   const daejeonSocial = staticCountsData?.[5].count ?? 0;
   const allReception = everyCommon + everyMeister + everySocial + daejeonCommon + daejeonMeister + daejeonSocial;
 
-  const allCommon = (applicationCountData?.[0].count ?? 25) + (applicationCountData?.[3].count ?? 25);
-  const allMeister = (applicationCountData?.[1].count ?? 6) + (applicationCountData?.[2].count ?? 6);
+  const allCommon = (applicationCountData?.[0].count ?? 25) + (applicationCountData?.[1].count ?? 25);
+  const allMeister = (applicationCountData?.[3].count ?? 6) + (applicationCountData?.[2].count ?? 6);
   const allSocial = (applicationCountData?.[4].count ?? 1) + (applicationCountData?.[5].count ?? 1);
 
   const commonPercent = +((everyCommon + daejeonCommon) / allCommon).toFixed(2);
@@ -93,7 +93,7 @@ const Home = () => {
         <Text width={80} align="start" size="body1" color="black900">
           총
         </Text>
-        <_Application percent={((allCommon + allMeister + allSocial) / allReception) * 100}>
+        <_Application percent={(allReception / (allCommon + allMeister + allSocial)) * 100}>
           <_ApplicationText margin={[0, 0, 0, 12]} color="realWhite" size="body1">
             {`${allReception}명 (총 ${allCommon + allMeister + allSocial}명)`}
           </_ApplicationText>
