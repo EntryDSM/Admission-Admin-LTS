@@ -12,8 +12,13 @@ const cookie = new Cookies();
 instance.interceptors.request.use(
   (config) => {
     const accessToken = cookie.get('access_token');
-    accessToken && (config.headers!['Authorization'] = `Bearer ${accessToken}`);
-    return config;
+    const returnConfig = {
+      ...config,
+    };
+    if (accessToken) {
+      returnConfig.headers!['Authorization'] = `Bearer ${accessToken}`;
+    }
+    return returnConfig;
   },
   (error: AxiosError) => {
     return Promise.reject(error);
@@ -21,35 +26,39 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(
-  async (response) => {
-    return response;
-  },
+  async (response) => response,
   async (error: AxiosError<AxiosError>) => {
     if (axios.isAxiosError(error) && error.response) {
-      const {
-        config,
-        response: { status },
-      } = error;
-      if (status === 401) {
+      const { config } = error;
+      const refreshToken = cookie.get('refresh_token');
+
+      if (
+        error.response.data.message === 'Invalid Token' ||
+        error.response.data.message === 'Expired Token' ||
+        error.response.data.message === 'User Not Found'
+      ) {
         const originalRequest = config;
-        const refreshToken = await cookie.get('refresh_token');
-        cookie.remove('access_token');
 
         if (refreshToken) {
           ReissueToken(refreshToken)
             .then((res) => {
-              cookie.set('access_token', res.access_token);
-              cookie.set('refresh_token', res.refresh_token);
-              if (originalRequest?.headers) originalRequest.headers['Authorization'] = `Bearer ${res.access_token}`;
-              return axios(originalRequest as AxiosRequestConfig);
+              cookie.set('access_token', res.access_token, { path: '/' });
+              cookie.set('refresh_token', res.refresh_token, { path: '/' });
+              if (originalRequest) {
+                if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.access_token}`;
+                return axios(originalRequest);
+              }
             })
             .catch(() => {
               cookie.remove('access_token');
               cookie.remove('refresh_token');
-              window.location.href = 'https://auth.entrydsm.hs.kr/login';
+              window.location.replace(
+                'https://auth.entrydsm.hs.kr/admin-login?redirect_url=https://admin.entrydsm.hs.kr',
+              );
             });
         } else {
-          window.location.href = 'https://auth.entrydsm.hs.kr/login';
+          alert('로그인 후 이용해주세요');
+          window.location.replace('https://auth.entrydsm.hs.kr/admin-login?redirect_url=https://admin.entrydsm.hs.kr');
         }
       } else return Promise.reject(error);
     }

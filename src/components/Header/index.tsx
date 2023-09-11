@@ -4,6 +4,7 @@ import { Button, Text, Icon, theme, Stack } from '@team-entry/design_system';
 import { useState } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import Logo from '../../assets/Logo.svg';
+import { Cookies } from 'react-cookie';
 
 type THeader = '전형 일정 수정' | '접수 현황' | '정원 수정' | '지원자 목록' | '';
 
@@ -23,6 +24,7 @@ const headerList: IHeaderList[] = [
 const Header = () => {
   const [visibility, setVisibility] = useState<boolean>(false);
   const location = useLocation();
+  const cookie = new Cookies();
 
   return (
     <>
@@ -49,12 +51,25 @@ const Header = () => {
             })}
           </_._Texts>
         </Stack>
-        <Stack align="center">
-          <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
-            어드민
-          </Text>
-          <Icon cursor="pointer" icon="DownArrow" color="black500" />
-        </Stack>
+        {cookie.get('access_token') ? (
+          <Stack align="center">
+            <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
+              어드민
+            </Text>
+            <Icon cursor="pointer" icon="DownArrow" color="black500" />
+          </Stack>
+        ) : (
+          <Button
+            color="green"
+            kind="rounded"
+            onClick={() => {
+              window.location.href =
+                'https://auth.entrydsm.hs.kr/admin-login/login?redirect_url=https://admin.entrydsm.hs.kr';
+            }}
+          >
+            로그인
+          </Button>
+        )}
       </_._HeaderContainer>
       <Outlet />
     </>
