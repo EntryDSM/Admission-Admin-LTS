@@ -84,7 +84,7 @@ const ApplicantsList = () => {
           isChecked={filter.isNotSubmitted}
           value=""
           label="최종제출 미완료"
-          name="isNotSumbmitted"
+          name="isNotSubmitted"
           onClick={onChangeCheckBox}
         />
         <_Line />
