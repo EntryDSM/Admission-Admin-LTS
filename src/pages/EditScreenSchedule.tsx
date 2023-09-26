@@ -1,7 +1,6 @@
 import { Button, Dropdown, Text, theme } from '@team-entry/design_system';
 import styled from '@emotion/styled';
 import ProgressBar from '../components/ProgressBar';
-import { useEffect, useState } from 'react';
 import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { useDropDown } from '@/hooks/useDropDown';
 import { editSchedule, getSchedule } from '@/utils/api/schedule';
@@ -13,6 +12,7 @@ const screenScheduleProgress = ['원서 제출', '1차 발표', '심층 면접',
 const EditScreenSchedule = () => {
   const { mutate } = editSchedule();
   const { data } = getSchedule();
+  console.log(data);
 
   console.log(data?.schedules[0].date.slice(5, 7));
 
