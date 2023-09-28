@@ -138,7 +138,7 @@ const ApplicantsList = () => {
           }}
         >
           <Text align="center" width={110} color="black800" size="body3">
-            {idx + 1 + page * 10}
+            {idx + 1 + page * filter.size}
           </Text>
           <Text align="center" width={110} color="black800" size="body3">
             {applicant.name}
