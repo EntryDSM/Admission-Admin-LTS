@@ -33,6 +33,7 @@ const _Wrapper = styled.div`
   top: 0;
   right: -700px;
   min-width: 418px;
+  max-width: 800px;
   background-color: white;
   height: 100vh;
   z-index: 100;

@@ -2,9 +2,14 @@ import { Icon, Button, theme } from '@team-entry/design_system';
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
 
-const PageNation = () => {
+interface PageNationProps {
+  pageNum: number;
+  current: number;
+  setCurrent: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const PageNation = ({ pageNum, current, setCurrent }: PageNationProps) => {
   const [hover, setHover] = useState({ left: false, right: false });
-  const [current, setCurrent] = useState(0);
 
   return (
     <_Buttons>
@@ -19,10 +24,15 @@ const PageNation = () => {
             return { ...prev, left: false };
           })
         }
+        onClick={() => setCurrent((prev) => prev - 1)}
       >
         <Icon color={hover.left ? 'realWhite' : 'green500'} icon="LeftArrow" size={24} />
       </_Button>
-      <_Button clicked={current === 0}>1</_Button>
+      {[...Array(pageNum)].map((_, idx) => (
+        <_Button clicked={current === idx} onClick={() => setCurrent(idx)}>
+          {idx + 1}
+        </_Button>
+      ))}
       <_Button
         onMouseOver={() =>
           setHover((prev) => {
@@ -34,6 +44,7 @@ const PageNation = () => {
             return { ...prev, right: false };
           })
         }
+        onClick={() => setCurrent((prev) => prev + 1)}
       >
         <Icon color={hover.right ? 'realWhite' : 'green500'} icon="RightArrow" size={24} />
       </_Button>

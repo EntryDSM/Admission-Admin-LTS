@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Checkbox, Input, Stack, Text, theme, VStack } from '@team-entry/design_system';
+import { Button, Checkbox, Input, Stack, Text, theme, VStack } from '@team-entry/design_system';
 import { getApplicationList } from '@/utils/api/admin';
 import { IApplicationListRequest } from '@/utils/api/admin/types';
 import { applicationTypeToKorean } from '@/utils/translate';
@@ -27,6 +27,7 @@ const ApplicantsList = () => {
     schoolName: '',
     name: '',
   });
+  const [page, setPage] = useState(0);
 
   const onChangeCheckBox = (e: React.MouseEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
@@ -38,18 +39,27 @@ const ApplicantsList = () => {
 
   const { data: application_list } = getApplicationList(filter);
 
+  useEffect(() => {
+    setFilter((prev) => ({ ...prev, page }));
+  }, [page]);
+
   return (
     <_Wrapper>
       <Text size="header1" color="black900" margin={[0, 0, 30, 0]}>
         지원자 목록
       </Text>
-      <Input
-        width={300}
-        icon="Magnifier"
-        type="text"
-        placeholder="검색"
-        onChange={(e) => setFilter({ ...filter, name: e.target.value })}
-      />
+      <Stack style={{ width: '100%' }} justify="space-between">
+        <Input
+          width={300}
+          icon="Magnifier"
+          type="text"
+          placeholder="검색"
+          onChange={(e) => setFilter({ ...filter, name: e.target.value })}
+        />
+        <Button color="green" onClick={() => {}}>
+          Excel로 내보내기
+        </Button>
+      </Stack>
       <Text color="black900" size="title2" margin={[40, 0, 8, 0]}>
         필터
       </Text>
@@ -128,7 +138,7 @@ const ApplicantsList = () => {
           }}
         >
           <Text align="center" width={110} color="black800" size="body3">
-            {idx + 1}
+            {idx + 1 + page * 10}
           </Text>
           <Text align="center" width={110} color="black800" size="body3">
             {applicant.name}
@@ -163,7 +173,7 @@ const ApplicantsList = () => {
       >
         <StudentInfo receiptCode={receiptCode} />
       </SideBar>
-      {/* <PageNation /> */}
+      <PageNation pageNum={application_list?.total_pages || 0} current={page} setCurrent={setPage} />
     </_Wrapper>
   );
 };
