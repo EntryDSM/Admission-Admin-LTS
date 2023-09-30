@@ -1,6 +1,8 @@
 /** 전형 일정 수정 */
 
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { Toast } from '@team-entry/design_system';
+import { Axios, AxiosError } from 'axios';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from '../axios';
 import { IEditScheduleRequest, IGetScheduleResponse } from './type';
 
@@ -15,10 +17,17 @@ export const editSchedule = () => {
   return useMutation(response, {
     onSuccess: () => {
       queryClient.invalidateQueries(['schedule']);
-      alert('수정 성공');
+      Toast('전형 일정이 수정되었습니다.', { type: 'success' });
     },
-    onError: () => {
-      alert('수정 실패');
+    onError: (res: AxiosError<AxiosError>) => {
+      switch (res.response?.data.message) {
+        case 'Schedule sequence is not valid':
+          Toast('전형 일정을 다시 확인해주세요.', { type: 'error' });
+          break;
+        default:
+          Toast('전형 일정이 수정에 실패하였습니다.', { type: 'error' });
+          break;
+      }
     },
   });
 };

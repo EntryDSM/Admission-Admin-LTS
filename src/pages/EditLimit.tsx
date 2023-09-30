@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import {
-  Button, Input, Stack, Text, theme,
-} from '@team-entry/design_system';
-import { useQueryClient } from 'react-query';
+import { Button, Input, Stack, Text, theme, Toast } from '@team-entry/design_system';
+import { useQueryClient } from '@tanstack/react-query';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { editApplicationCount, getApplicationCount, getStaticCounts } from '@/utils/api/admin';
 import { useInput } from '@/hooks/useInput';
+import { useCombineMutation } from '@/hooks/useCombineMutation';
 
 function EditLimit() {
-  const { mutate } = editApplicationCount();
-  const [state, setState] = useState({
+  const { mutateAsync } = editApplicationCount();
+
+  const { setForm, form, onChange } = useInput({
     commonDaejeon: '',
     meisterDajeon: '',
     socialDaejeon: '',
@@ -18,7 +18,6 @@ function EditLimit() {
     meisterNationWide: '',
     socialNationWide: '',
   });
-  const { setForm, form, onChange } = useInput(state);
 
   const { data } = getApplicationCount();
 
@@ -42,16 +41,23 @@ function EditLimit() {
   }, [data]);
 
   const queryClient = useQueryClient();
+  const { combinedMutations } = useCombineMutation();
 
   const saveLimit = () => {
-    mutate({ application_type: 'COMMON', is_daejeon: true, count: +form.commonDaejeon });
-    mutate({ application_type: 'COMMON', is_daejeon: false, count: +form.commonNationWide });
-    mutate({ application_type: 'MEISTER', is_daejeon: true, count: +form.meisterDajeon });
-    mutate({ application_type: 'MEISTER', is_daejeon: false, count: +form.meisterNationWide });
-    mutate({ application_type: 'SOCIAL', is_daejeon: true, count: +form.socialDaejeon });
-    mutate({ application_type: 'SOCIAL', is_daejeon: false, count: +form.socialNationWide });
-    queryClient.invalidateQueries('');
-    alert('수정이 완료되었습니다.');
+    combinedMutations(
+      [
+        () => mutateAsync({ application_type: 'COMMON', is_daejeon: true, count: +form.commonDaejeon }),
+        () => mutateAsync({ application_type: 'COMMON', is_daejeon: false, count: +form.commonNationWide }),
+        () => mutateAsync({ application_type: 'MEISTER', is_daejeon: true, count: +form.meisterDajeon }),
+        () => mutateAsync({ application_type: 'MEISTER', is_daejeon: false, count: +form.meisterNationWide }),
+        () => mutateAsync({ application_type: 'SOCIAL', is_daejeon: true, count: +form.socialDaejeon }),
+        () => mutateAsync({ application_type: 'SOCIAL', is_daejeon: false, count: +form.socialNationWide }),
+      ],
+      () => {
+        queryClient.invalidateQueries(['applicationCount']);
+        Toast('수정이 완료되었습니다.', { type: 'success' });
+      },
+    );
   };
 
   return (
@@ -154,12 +160,13 @@ function EditLimit() {
           </Text>
         </_Inputs>
         <_Total color="black900" size="title1" width={200}>
-          {`${+form.commonDaejeon
-            + +form.commonNationWide
-            + +form.meisterDajeon
-            + +form.meisterNationWide
-            + +form.socialDaejeon
-            + +form.socialNationWide
+          {`${
+            +form.commonDaejeon +
+            +form.commonNationWide +
+            +form.meisterDajeon +
+            +form.meisterNationWide +
+            +form.socialDaejeon +
+            +form.socialNationWide
           }명`}
         </_Total>
       </_TBody>

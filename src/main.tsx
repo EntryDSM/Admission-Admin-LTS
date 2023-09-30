@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { StyledProvider } from '@team-entry/design_system';
+import { CustomToastContainer, StyledProvider } from '@team-entry/design_system';
 import { GlobalStyle } from './style/globalStyle.style';
 import { Global } from '@emotion/react';
-import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <QueryClientProvider client={queryClient}>
         <Global styles={GlobalStyle} />
         <App />
+        <CustomToastContainer />
       </QueryClientProvider>
     </StyledProvider>
   </>,
