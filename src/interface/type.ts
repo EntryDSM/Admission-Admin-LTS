@@ -10,6 +10,8 @@ export type InputType =
 
 export type ScheduleType =
   | 'NOT_APPLICATION_PERIOD'
+  | 'START_DATE'
+  | 'END_DATE'
   | 'APPLICATION_PERIOD'
   | 'BEFORE_FIRST_ANNOUNCEMENT'
   | 'FIRST_ANNOUNCEMENT'

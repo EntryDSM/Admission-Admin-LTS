@@ -4,6 +4,7 @@ import ProgressBar from '../components/ProgressBar';
 import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { useDropDown } from '@/hooks/useDropDown';
 import { editSchedule, getSchedule } from '@/utils/api/schedule';
+import { useEffect } from 'react';
 
 const scheduleType = ['START_DATE', 'FIRST_ANNOUNCEMENT', 'INTERVIEW', 'SECOND_ANNOUNCEMENT', 'END_DATE'];
 
@@ -12,9 +13,6 @@ const screenScheduleProgress = ['원서 제출', '1차 발표', '심층 면접',
 const EditScreenSchedule = () => {
   const { mutate } = editSchedule();
   const { data } = getSchedule();
-  console.log(data);
-
-  console.log(data?.schedules[0].date.slice(5, 7));
 
   const {
     form: startDropDown,
@@ -27,7 +25,11 @@ const EditScreenSchedule = () => {
     ['01월', '01일', '00시', '00분'],
   ]);
 
-  const { form: endDropDown, onChange: onChangeEndDropDown } = useDropDown([['01월', '01일', '00시', '00분']]);
+  const {
+    form: endDropDown,
+    onChange: onChangeEndDropDown,
+    setForm: setEndDropDown,
+  } = useDropDown([['01월', '01일', '00시', '00분']]);
 
   const dropDownOption = (index: number) => {
     switch (index) {
@@ -44,9 +46,50 @@ const EditScreenSchedule = () => {
     }
   };
 
-  // useEffect(() => {
-  //   setStartDropDown((prev) => [...prev]);
-  // }, [startDropDown]);
+  useEffect(() => {
+    if (data) {
+      const startDate = new Date(data?.schedules[0]?.date ?? '');
+      const endDate = new Date(data?.schedules[1]?.date ?? '');
+      const firstAnnouncementDate = new Date(data?.schedules[2]?.date ?? '');
+      const interviewDate = new Date(data?.schedules[3]?.date ?? '');
+      const secondAnnouncementDate = new Date(data?.schedules[4]?.date ?? '');
+
+      setStartDropDown(() => [
+        [
+          `${(startDate.getMonth() + 1).toString().padStart(2, '0')}월`,
+          `${startDate.getDate().toString().padStart(2, '0')}일`,
+          `${startDate.getHours().toString().padStart(2, '0')}시`,
+          `${startDate.getMinutes().toString().padStart(2, '0')}분`,
+        ],
+        [
+          `${(firstAnnouncementDate.getMonth() + 1).toString().padStart(2, '0')}월`,
+          `${firstAnnouncementDate.getDate().toString().padStart(2, '0')}일`,
+          `${firstAnnouncementDate.getHours().toString().padStart(2, '0')}시`,
+          `${firstAnnouncementDate.getMinutes().toString().padStart(2, '0')}분`,
+        ],
+        [
+          `${(interviewDate.getMonth() + 1).toString().padStart(2, '0')}월`,
+          `${interviewDate.getDate().toString().padStart(2, '0')}일`,
+          `${interviewDate.getHours().toString().padStart(2, '0')}시`,
+          `${interviewDate.getMinutes().toString().padStart(2, '0')}분`,
+        ],
+        [
+          `${(secondAnnouncementDate.getMonth() + 1).toString().padStart(2, '0')}월`,
+          `${secondAnnouncementDate.getDate().toString().padStart(2, '0')}일`,
+          `${secondAnnouncementDate.getHours().toString().padStart(2, '0')}시`,
+          `${secondAnnouncementDate.getMinutes().toString().padStart(2, '0')}분`,
+        ],
+      ]);
+      setEndDropDown([
+        [
+          `${(endDate.getMonth() + 1).toString().padStart(2, '0')}월`,
+          `${endDate.getDate().toString().padStart(2, '0')}일`,
+          `${endDate.getHours().toString().padStart(2, '0')}시`,
+          `${endDate.getMinutes().toString().padStart(2, '0')}분`,
+        ],
+      ]);
+    }
+  }, [data]);
 
   return (
     <_Wrapper>
@@ -105,7 +148,7 @@ const EditScreenSchedule = () => {
                       <Dropdown
                         width={80}
                         onChange={(value) => onChangeEndDropDown([typeIdx, dateIdx], value)}
-                        options={generateNumberArray(0, 12, '월')}
+                        options={dropDownOption(dateIdx)}
                         value={res}
                       />
                     );
@@ -120,10 +163,43 @@ const EditScreenSchedule = () => {
         <Button
           color="green"
           onClick={() => {
-            mutate({
-              type: 'FIRST_ANNOUNCEMENT',
-              date: '2021-10-20`T`12:05:55',
-            });
+            mutate([
+              {
+                type: 'START_DATE',
+                date: `2023-${startDropDown[0][0].slice(0, 2)}-${startDropDown[0][1].slice(
+                  0,
+                  2,
+                )}T${startDropDown[0][2].slice(0, 2)}:${startDropDown[0][3].slice(0, 2)}:00`,
+              },
+              {
+                type: 'END_DATE',
+                date: `2023-${endDropDown[0][0].slice(0, 2)}-${endDropDown[0][1].slice(0, 2)}T${endDropDown[0][2].slice(
+                  0,
+                  2,
+                )}:${endDropDown[0][3].slice(0, 2)}:00`,
+              },
+              {
+                type: 'FIRST_ANNOUNCEMENT',
+                date: `2023-${startDropDown[1][0].slice(0, 2)}-${startDropDown[1][1].slice(
+                  0,
+                  2,
+                )}T${startDropDown[1][2].slice(0, 2)}:${startDropDown[1][3].slice(0, 2)}:00`,
+              },
+              {
+                type: 'INTERVIEW',
+                date: `2023-${startDropDown[2][0].slice(0, 2)}-${startDropDown[2][1].slice(
+                  0,
+                  2,
+                )}T${startDropDown[2][2].slice(0, 2)}:${startDropDown[2][3].slice(0, 2)}:00`,
+              },
+              {
+                type: 'SECOND_ANNOUNCEMENT',
+                date: `2023-${startDropDown[3][0].slice(0, 2)}-${startDropDown[3][1].slice(
+                  0,
+                  2,
+                )}T${startDropDown[3][2].slice(0, 2)}:${startDropDown[3][3].slice(0, 2)}:00`,
+              },
+            ]);
           }}
         >
           저장

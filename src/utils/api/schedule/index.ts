@@ -1,17 +1,26 @@
 /** 전형 일정 수정 */
 
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { instance } from '../axios';
 import { IEditScheduleRequest, IGetScheduleResponse } from './type';
 
 const router = 'schedule';
 
 export const editSchedule = () => {
-  const response = async (params: IEditScheduleRequest) => {
-    const { data } = await instance.patch(`${router}`, params);
+  const response = async (params: IEditScheduleRequest[]) => {
+    const { data } = await instance.patch(`${router}`, { schedules: params });
     return data;
   };
-  return useMutation(response);
+  const queryClient = useQueryClient();
+  return useMutation(response, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['schedule']);
+      alert('수정 성공');
+    },
+    onError: () => {
+      alert('수정 실패');
+    },
+  });
 };
 
 export const getSchedule = () => {

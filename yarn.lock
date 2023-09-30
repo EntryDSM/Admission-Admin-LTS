@@ -796,15 +796,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@team-entry/design_system@npm:^1.0.92":
-  version: 1.0.92
-  resolution: "@team-entry/design_system@npm:1.0.92"
+"@team-entry/design_system@npm:^1.1.9":
+  version: 1.1.9
+  resolution: "@team-entry/design_system@npm:1.1.9"
   dependencies:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 135741acae33667ec1a9b1a4fa790894a460ae6eda998546ac91dd847b23fbd60b3561d3c66ef8901001bde80f55db3db76b2578a027248142f0e5872433caac
+    react-toastify: ^9.1.3
+  checksum: 7775c1133d25b142e2556349c15dd83a1226b0da899529565bdbe517bae36e85ccf73583e0ffa467fe30f5dcbb2043815c3b96cefe0ceaea9f7ae6122ca1a992
   languageName: node
   linkType: hard
 
@@ -1566,6 +1567,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^1.1.1":
+  version: 1.2.1
+  resolution: "clsx@npm:1.2.1"
+  checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
+  languageName: node
+  linkType: hard
+
 "color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
@@ -1864,7 +1872,7 @@ __metadata:
     "@emotion/css": ^11.10.6
     "@emotion/react": ^11.10.6
     "@emotion/styled": ^11.10.6
-    "@team-entry/design_system": ^1.0.92
+    "@team-entry/design_system": ^1.1.9
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     "@types/react-outside-click-handler": ^1.3.1
@@ -4231,6 +4239,18 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 16f3d108e0f833bfee447192e3f40bd6731b8b11d42ca6925443ec8aeb157a889fe8ece67baf690f75f0d146d0a212656f9216fcc2df6fd3a2bd263108ed0abb
+  languageName: node
+  linkType: hard
+
+"react-toastify@npm:^9.1.3":
+  version: 9.1.3
+  resolution: "react-toastify@npm:9.1.3"
+  dependencies:
+    clsx: ^1.1.1
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: e8bd92c5cbf831b43a042644ab9bc69abe6ceb3ce91ba71f5cd2d8b6a2c9885ca52770e1f1ba64c5632607f6df962db344a26c7fba57606faf5aa0e7bfc8535f
   languageName: node
   linkType: hard
 

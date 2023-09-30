@@ -25,7 +25,7 @@ const ProgressBar = () => {
       title: '1차 발표',
       date: `${
         firstAnnouncementDate.getMonth() + 1
-      }/${firstAnnouncementDate.getDate()} ${firstAnnouncementDate.getHours()}/${firstAnnouncementDate
+      }/${firstAnnouncementDate.getDate()} ${firstAnnouncementDate.getHours()}:${firstAnnouncementDate
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
@@ -33,7 +33,7 @@ const ProgressBar = () => {
     },
     {
       title: '심층 면접',
-      date: `${interviewDate.getMonth() + 1}/${interviewDate.getDate()} ${interviewDate.getHours()}/${interviewDate
+      date: `${interviewDate.getMonth() + 1}/${interviewDate.getDate()} ${interviewDate.getHours()}:${interviewDate
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
@@ -43,7 +43,7 @@ const ProgressBar = () => {
       title: '2차 발표',
       date: `${
         secondAnnouncementDate.getMonth() + 1
-      }/${secondAnnouncementDate.getDate()} ${secondAnnouncementDate.getHours()}/${secondAnnouncementDate
+      }/${secondAnnouncementDate.getDate()} ${secondAnnouncementDate.getHours()}:${secondAnnouncementDate
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
