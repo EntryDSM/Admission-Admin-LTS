@@ -1,4 +1,4 @@
-import { Icon, Button, theme } from '@team-entry/design_system';
+import { Icon, theme } from '@team-entry/design_system';
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Checkbox, Input, Stack, Text, theme, VStack } from '@team-entry/design_system';
-import { getApplicationList } from '@/utils/api/admin';
+import { getApplicationList, getApplicationListExcel } from '@/utils/api/admin';
 import { IApplicationListRequest } from '@/utils/api/admin/types';
 import { applicationTypeToKorean } from '@/utils/translate';
 import PageNation from '@/components/PageNation';
@@ -38,6 +38,7 @@ const ApplicantsList = () => {
   const [receiptCode, setReceiptCode] = useState('');
 
   const { data: application_list } = getApplicationList(filter);
+  const { mutate: application_list_excel } = getApplicationListExcel();
 
   useEffect(() => {
     setFilter((prev) => ({ ...prev, page }));
@@ -56,7 +57,7 @@ const ApplicantsList = () => {
           placeholder="검색"
           onChange={(e) => setFilter({ ...filter, name: e.target.value })}
         />
-        <Button color="green" onClick={() => {}}>
+        <Button color="green" onClick={application_list_excel}>
           Excel로 내보내기
         </Button>
       </Stack>

@@ -9,6 +9,8 @@ import {
   IApplicationListResponse,
   IGetScoreStatisticsResponse,
 } from './types';
+import fileSaver from 'file-saver';
+import { getFileNameFromContentDisposition } from '@/utils/decoder';
 
 const router = 'admin';
 
@@ -106,4 +108,20 @@ export const getStaticCounts = () => {
     return data;
   };
   return useQuery<IApplicationCountRequest[]>(['staticCount'], response);
+};
+
+/** 지원자 목록 엑셀 출력 */
+export const getApplicationListExcel = () => {
+  const response = async () => {
+    const { data } = await instance.get(`${router}/excel/applicants/new`, {
+      responseType: 'blob',
+    });
+    return data;
+  };
+
+  return useMutation(response, {
+    onSuccess: (res) => {
+      fileSaver.saveAs(res, '지원자 목록');
+    },
+  });
 };
