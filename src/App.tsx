@@ -12,8 +12,7 @@ function App() {
     if (!accessToken || !refreshToken) {
       alert('로그인 후 이용 가능합니다');
       window.location.href = 'https://auth.entrydsm.hs.kr/admin-login?redirect_url=https://admin.entrydsm.hs.kr';
-    }
-    if (authority != 'admin') {
+    } else if (authority != 'admin') {
       alert('권한이 없습니다.');
       window.location.href = 'https://auth.entrydsm.hs.kr/admin-login?redirect_url=https://admin.entrydsm.hs.kr';
     }
