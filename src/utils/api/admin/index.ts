@@ -10,7 +10,6 @@ import {
   IGetScoreStatisticsResponse,
 } from './types';
 import fileSaver from 'file-saver';
-import { getFileNameFromContentDisposition } from '@/utils/decoder';
 
 const router = 'admin';
 
