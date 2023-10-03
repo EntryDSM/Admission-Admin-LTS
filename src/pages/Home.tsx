@@ -41,7 +41,7 @@ const Home = () => {
             지금은 원서제출 기간이 아닙니다
           </Text>
           <Text size="title2" color="black600">
-            원서 제출 : 10월 17일 ~ 10월 20일
+            원서 제출 : 10월 16일 ~ 10월 19일
           </Text>
         </VStack>
         <ProgressBar />

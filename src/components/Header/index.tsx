@@ -53,10 +53,13 @@ const Header = () => {
         </Stack>
         {cookie.get('access_token') ? (
           <Stack align="center">
-            <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
+            <Button color="green" onClick={() => (window.location.href = 'https://www.entrydsm.hs.kr')}>
+              메인으로
+            </Button>
+            {/* <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
               어드민
             </Text>
-            <Icon cursor="pointer" icon="DownArrow" color="black500" />
+            <Icon cursor="pointer" icon="DownArrow" color="black500" /> */}
           </Stack>
         ) : (
           <Button
