@@ -37,7 +37,7 @@ const ApplicantsList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [receiptCode, setReceiptCode] = useState('');
 
-  const { data: application_list } = getApplicationList(filter);
+  const { data: application_list, isLoading } = getApplicationList(filter);
   const { mutate: application_list_excel } = getApplicationListExcel();
 
   useEffect(() => {
@@ -174,7 +174,7 @@ const ApplicantsList = () => {
       >
         <StudentInfo receiptCode={receiptCode} />
       </SideBar>
-      <PageNation pageNum={application_list?.total_pages || 0} current={page} setCurrent={setPage} />
+      {!isLoading && <PageNation pageNum={application_list?.total_pages || 0} current={page} setCurrent={setPage} />}
     </_Wrapper>
   );
 };
