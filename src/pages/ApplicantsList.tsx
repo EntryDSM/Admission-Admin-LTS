@@ -8,7 +8,7 @@ import PageNation from '@/components/PageNation';
 import { SideBar } from '@/components/SideBar';
 import { StudentInfo } from '@/components/StudentInfo';
 
-const headText = ['접수번호', '이름', '지역', '전형', '원서 제출 상태', '최종제출'];
+const headText = ['접수번호', '이름', '지역', '전형', '원서 도착 상태', '최종제출'];
 
 const ApplicantsList = () => {
   const [filter, setFilter] = useState<IApplicationListRequest>({
