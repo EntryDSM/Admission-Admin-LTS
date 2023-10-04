@@ -24,7 +24,7 @@ const PageNation = ({ pageNum, current, setCurrent }: PageNationProps) => {
             return { ...prev, left: false };
           })
         }
-        onClick={() => setCurrent((prev) => prev - 1)}
+        onClick={() => current != 0 && setCurrent((prev) => prev - 1)}
       >
         <Icon color={hover.left ? 'realWhite' : 'green500'} icon="LeftArrow" size={24} />
       </_Button>
@@ -44,7 +44,7 @@ const PageNation = ({ pageNum, current, setCurrent }: PageNationProps) => {
             return { ...prev, right: false };
           })
         }
-        onClick={() => setCurrent((prev) => prev + 1)}
+        onClick={() => current != pageNum - 1 && setCurrent((prev) => prev + 1)}
       >
         <Icon color={hover.right ? 'realWhite' : 'green500'} icon="RightArrow" size={24} />
       </_Button>
