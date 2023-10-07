@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Checkbox, Input, Stack, Text, theme, VStack } from '@team-entry/design_system';
-import { getApplicationList, getApplicationListExcel } from '@/utils/api/admin';
+import { Button, Checkbox, Input, Stack, Text, theme } from '@team-entry/design_system';
+import { changeArrivedStatus, getApplicationList, getApplicationListExcel } from '@/utils/api/admin';
 import { IApplicationListRequest } from '@/utils/api/admin/types';
 import { applicationTypeToKorean } from '@/utils/translate';
 import PageNation from '@/components/PageNation';
@@ -39,6 +39,7 @@ const ApplicantsList = () => {
 
   const { data: application_list, isLoading } = getApplicationList(filter);
   const { mutate: application_list_excel } = getApplicationListExcel();
+  const { mutate: change_arrived_status } = changeArrivedStatus();
 
   useEffect(() => {
     setFilter((prev) => ({ ...prev, page }));
@@ -155,7 +156,13 @@ const ApplicantsList = () => {
               color="green"
               label=""
               name=""
-              onClick={() => {}}
+              onClick={(e) => {
+                e.stopPropagation();
+                change_arrived_status({
+                  receipt_code: applicant.receipt_code,
+                  is_prints_arrived: !applicant.is_prints_arrived,
+                });
+              }}
               value=""
               isChecked={applicant.is_prints_arrived}
             />

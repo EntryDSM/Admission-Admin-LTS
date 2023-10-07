@@ -31,7 +31,7 @@ const _Wrapper = styled.div`
   overflow: scroll;
   padding: 40px 40px 75px 40px;
   top: 0;
-  right: -700px;
+  right: -800px;
   min-width: 418px;
   max-width: 800px;
   background-color: white;

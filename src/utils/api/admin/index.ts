@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Toast } from '@team-entry/design_system';
 import { instance } from '../axios';
 import {
@@ -121,6 +121,34 @@ export const getApplicationListExcel = () => {
   return useMutation(response, {
     onSuccess: (res) => {
       fileSaver.saveAs(res, '지원자 목록');
+    },
+  });
+};
+
+/** 원서 도착 상태 여부 변경 */
+export const changeArrivedStatus = () => {
+  const response = async ({
+    receipt_code,
+    is_prints_arrived,
+  }: {
+    receipt_code: number;
+    is_prints_arrived: boolean;
+  }) => {
+    const { data } = await instance.patch(
+      `${router}/application/prints-arrived/${receipt_code}?is_prints_arrived=${is_prints_arrived}`,
+    );
+    return data;
+  };
+
+  const queryClient = useQueryClient();
+
+  return useMutation(response, {
+    onSuccess: (res) => {
+      queryClient.invalidateQueries(['applicationList']);
+      Toast('원서 도착 상태가 수정되었습니다', { type: 'success' });
+    },
+    onError: () => {
+      Toast('원서 도착 상태 수정에 실패하였습니다', { type: 'error' });
     },
   });
 };
