@@ -103,7 +103,7 @@ const Home = () => {
         </Text>
       </_GraphWrapper>
 
-      <div style={{ display: 'flex', margin: '20px 0px 20px 80px', gap: '20px', width: '100%' }}>
+      <div style={{ display: 'flex', margin: '20px 0', gap: '20px', width: '100%' }}>
         <_Shortcut>
           <Link to="/screenSchedule">
             <_ShorcutButton>
@@ -218,7 +218,7 @@ const _ApplicationText = styled(Text)`
 const _Shortcut = styled.div`
   display: flex;
   gap: 20px;
-  width: 50%;
+  margin: 0 auto;
   @media screen and (max-width: 1136px) and (min-width: 769px) {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(1, 1fr);
