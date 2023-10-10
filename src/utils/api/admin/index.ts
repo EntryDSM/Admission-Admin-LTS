@@ -112,7 +112,7 @@ export const getStaticCounts = () => {
 /** 지원자 목록 엑셀 출력 */
 export const getApplicationListExcel = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/excel/applicants/new`, {
+    const { data } = await instance.get(`${router}/excel/applicants`, {
       responseType: 'blob',
     });
     return data;
