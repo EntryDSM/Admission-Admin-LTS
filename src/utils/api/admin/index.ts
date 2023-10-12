@@ -118,9 +118,14 @@ export const getApplicationListExcel = () => {
     return data;
   };
 
+  const date = new Date();
+
   return useMutation(response, {
     onSuccess: (res) => {
-      fileSaver.saveAs(res, '지원자 목록');
+      fileSaver.saveAs(
+        res,
+        `지원자목록_${date.getMonth() + 1}월${date.getDate()}일_${date.getHours()}시${date.getMinutes()}분`,
+      );
     },
   });
 };
