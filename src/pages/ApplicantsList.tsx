@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Checkbox, Input, Stack, Text, theme } from '@team-entry/design_system';
-import { changeArrivedStatus, getApplicationList, getApplicationListExcel } from '@/utils/api/admin';
+import {
+  changeArrivedStatus,
+  getAdmissionTicket,
+  getApplicationList,
+  getApplicationListExcel,
+} from '@/utils/api/admin';
 import { IApplicationListRequest } from '@/utils/api/admin/types';
 import { applicationTypeToKorean } from '@/utils/translate';
 import PageNation from '@/components/PageNation';
@@ -39,6 +44,7 @@ const ApplicantsList = () => {
 
   const { data: application_list, isLoading } = getApplicationList(filter);
   const { mutate: application_list_excel } = getApplicationListExcel();
+  const { mutate: admission_ticket_excel } = getAdmissionTicket();
   const { mutate: change_arrived_status } = changeArrivedStatus();
 
   useEffect(() => {
@@ -58,9 +64,14 @@ const ApplicantsList = () => {
           placeholder="검색"
           onChange={(e) => setFilter({ ...filter, name: e.target.value })}
         />
-        <Button color="green" onClick={application_list_excel}>
-          Excel로 내보내기
-        </Button>
+        <Stack gap={20}>
+          <Button color="green" onClick={admission_ticket_excel}>
+            수험표 출력
+          </Button>
+          <Button color="green" onClick={application_list_excel}>
+            Excel로 내보내기
+          </Button>
+        </Stack>
       </Stack>
       <Text color="black900" size="title2" margin={[40, 0, 8, 0]}>
         필터

@@ -157,3 +157,24 @@ export const changeArrivedStatus = () => {
     },
   });
 };
+
+/** 수험표 엑셀 출력 */
+export const getAdmissionTicket = () => {
+  const response = async () => {
+    const { data } = await instance.get(`${router}/excel/admission-ticket`, {
+      responseType: 'blob',
+    });
+    return data;
+  };
+
+  const date = new Date();
+
+  return useMutation(response, {
+    onSuccess: (res) => {
+      fileSaver.saveAs(
+        res,
+        `수험표_${date.getMonth() + 1}월${date.getDate()}일_${date.getHours()}시${date.getMinutes()}분`,
+      );
+    },
+  });
+};
