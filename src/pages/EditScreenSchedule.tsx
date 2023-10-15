@@ -251,7 +251,7 @@ const _TBody = styled.div`
   align-items: center;
   justify-content: start;
   border-bottom: 1px solid ${theme.color.black100};
-  &: nth-of-type(2) {
+  &:nth-of-type(2) {
     z-index: 99;
   }
 `;
@@ -269,16 +269,16 @@ const _DropDowns = styled.div`
   margin-right: 50px;
   > div {
     position: relative;
-    &: nth-of-type(1) {
+    &:nth-of-type(1) {
       z-index: 2;
     }
-    &: nth-of-type(2) {
+    &:nth-of-type(2) {
       z-index: 2;
     }
-    &: nth-of-type(3) {
+    &:nth-of-type(3) {
       z-index: 1;
     }
-    &: nth-of-type(4) {
+    &:nth-of-type(4) {
       z-index: 1;
     }
   }
