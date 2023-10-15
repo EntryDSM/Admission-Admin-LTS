@@ -26,9 +26,9 @@ const Home = () => {
   const daejeonSocial = staticCountsData?.[5].count ?? 0;
   const allReception = everyCommon + everyMeister + everySocial + daejeonCommon + daejeonMeister + daejeonSocial;
 
-  const allCommon = (applicationCountData?.[0].count ?? 25) + (applicationCountData?.[1].count ?? 25);
-  const allMeister = (applicationCountData?.[3].count ?? 6) + (applicationCountData?.[2].count ?? 6);
-  const allSocial = (applicationCountData?.[4].count ?? 1) + (applicationCountData?.[5].count ?? 1);
+  const allCommon = (applicationCountData?.[0]?.count ?? 25) + (applicationCountData?.[1]?.count ?? 25);
+  const allMeister = (applicationCountData?.[3]?.count ?? 6) + (applicationCountData?.[2]?.count ?? 6);
+  const allSocial = (applicationCountData?.[4]?.count ?? 1) + (applicationCountData?.[5]?.count ?? 1);
 
   const commonPercent = +((everyCommon + daejeonCommon) / allCommon).toFixed(2);
   const meisterPercent = +((everyMeister + daejeonMeister) / allMeister).toFixed(2);
