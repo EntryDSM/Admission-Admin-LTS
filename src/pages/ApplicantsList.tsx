@@ -4,6 +4,7 @@ import { Button, Checkbox, Input, Stack, Text, theme } from '@team-entry/design_
 import {
   changeArrivedStatus,
   getAdmissionTicket,
+  getApplicantsCheck,
   getApplicationList,
   getApplicationListExcel,
 } from '@/utils/api/admin';
@@ -46,6 +47,7 @@ const ApplicantsList = () => {
   const { mutate: application_list_excel } = getApplicationListExcel();
   const { mutate: admission_ticket_excel } = getAdmissionTicket();
   const { mutate: change_arrived_status } = changeArrivedStatus();
+  const { mutate: applicants_check } = getApplicantsCheck();
 
   useEffect(() => {
     setFilter((prev) => ({ ...prev, page }));
@@ -65,6 +67,9 @@ const ApplicantsList = () => {
           onChange={(e) => setFilter({ ...filter, name: e.target.value })}
         />
         <Stack gap={20}>
+          <Button color="green" onClick={applicants_check}>
+            지원자 검증 목록 출력
+          </Button>
           <Button color="green" onClick={admission_ticket_excel}>
             수험표 출력
           </Button>

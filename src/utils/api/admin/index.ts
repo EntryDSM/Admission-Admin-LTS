@@ -10,6 +10,7 @@ import {
   IGetScoreStatisticsResponse,
 } from './types';
 import fileSaver from 'file-saver';
+import { Axios, AxiosError } from 'axios';
 
 const router = 'admin';
 
@@ -174,6 +175,30 @@ export const getAdmissionTicket = () => {
       fileSaver.saveAs(
         res,
         `수험표_${date.getMonth() + 1}월${date.getDate()}일_${date.getHours()}시${date.getMinutes()}분`,
+      );
+    },
+    onError: () => {
+      Toast('전형기간이 끝나지 않았습니다', { type: 'error' });
+    },
+  });
+};
+
+/** 지원자 검증 목록 엑셀 출력 */
+export const getApplicantsCheck = () => {
+  const response = async () => {
+    const { data } = await instance.get(`${router}/excel/applicants/check`, {
+      responseType: 'blob',
+    });
+    return data;
+  };
+
+  const date = new Date();
+
+  return useMutation(response, {
+    onSuccess: (res) => {
+      fileSaver.saveAs(
+        res,
+        `지원자검증목록${date.getMonth() + 1}월${date.getDate()}일_${date.getHours()}시${date.getMinutes()}분`,
       );
     },
   });
