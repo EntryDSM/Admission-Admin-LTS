@@ -38,6 +38,7 @@ const ApplicantsList = () => {
   const onChangeCheckBox = (e: React.MouseEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
     setFilter((prev) => ({ ...prev, [name]: checked }));
+    setPage(0);
   };
 
   const [isOpen, setIsOpen] = useState(false);
