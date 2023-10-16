@@ -38,7 +38,7 @@ const Home = () => {
       <Stack margin={[0, 'auto']}>
         <VStack margin={['top', 30]}>
           <Text size="header1" color="black900">
-            지금은 원서제출 기간이 아닙니다
+            지금은 원서제출 기간입니다.
           </Text>
           <Text size="title2" color="black600">
             원서 제출 : 10월 16일 ~ 10월 19일
