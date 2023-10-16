@@ -15,12 +15,11 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
   const { data: applciation_detail } = getApplicantDetail(receiptCode);
 
   const [isIntroduce, setIsIntroduce] = useState(true);
-
   return (
     <>
       {applciation_detail?.status.is_submitted ? (
         <VStack>
-          <_Img src={applciation_detail?.more_information.photo_url} alt="" />
+          <_Img src={'data:image/png;base64,' + applciation_detail?.more_information.photo_url} alt="" />
           <Grid>
             <VStack gap={10}>
               <HStack align="center" gap={20}>
