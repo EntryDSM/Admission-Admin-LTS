@@ -9,9 +9,13 @@ export interface IPropsType {
   nationWideRanges?: ICommonScoreDistribution;
 }
 
-export function CommonScoreCard({
-  title, ranges, daejeonRanges, nationWideRanges,
-}: IPropsType) {
+export function CommonScoreCard({ title, ranges, daejeonRanges, nationWideRanges }: IPropsType) {
+  if (daejeonRanges) {
+    const a = Object.values(daejeonRanges).reduce((acc, cur) => (acc += typeof cur == 'number' ? cur : 0), 0);
+    const b = Object.values(daejeonRanges).map((res) => typeof res == 'number');
+    const c = Object.values(daejeonRanges).map((res) => res);
+    console.log(a, b, c);
+  }
   return (
     <_ScoreStatus>
       <Text color="black900" size="title2">
@@ -22,10 +26,12 @@ export function CommonScoreCard({
         <_Box>
           {ranges.map((range) => (
             <Text color="black900" size="title3" width={90}>
-              {range}
-              :
+              {range}:
             </Text>
           ))}
+          <Text color="black900" size="title2" width={90}>
+            총합:
+          </Text>
         </_Box>
         <_Box>
           <Text color="black900" size="title1">
@@ -55,6 +61,11 @@ export function CommonScoreCard({
           <Text color="black900" size="title2">
             {daejeonRanges?.['-79']}
           </Text>
+          <Text color="black900" size="title2">
+            {daejeonRanges
+              ? Object.values(daejeonRanges).reduce((acc, cur) => (acc += typeof cur == 'number' ? cur : 0), 0)
+              : 0}
+          </Text>
         </_Box>
         <_Box>
           <Text color="black900" size="title1">
@@ -83,6 +94,11 @@ export function CommonScoreCard({
           </Text>
           <Text color="black900" size="title2">
             {nationWideRanges?.['-79']}
+          </Text>
+          <Text color="black900" size="title2" width={90}>
+            {nationWideRanges
+              ? Object.values(nationWideRanges).reduce((acc, cur) => (acc += typeof cur == 'number' ? cur : 0), 0)
+              : 0}
           </Text>
         </_Box>
       </_Boxs>

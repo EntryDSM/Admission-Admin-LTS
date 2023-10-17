@@ -9,9 +9,7 @@ export interface IPropsType {
   nationWideRanges?: ISpecialScoreDistribution;
 }
 
-export function SpecialScoreCard({
-  title, ranges, daejeonRanges, nationWideRanges,
-}: IPropsType) {
+export function SpecialScoreCard({ title, ranges, daejeonRanges, nationWideRanges }: IPropsType) {
   return (
     <_ScoreStatus>
       <Text color="black900" size="title2">
@@ -22,10 +20,12 @@ export function SpecialScoreCard({
         <_Box>
           {ranges.map((range) => (
             <Text color="black900" size="title3" width={90}>
-              {range}
-              :
+              {range}:
             </Text>
           ))}
+          <Text color="black900" size="title2" width={90}>
+            총합:
+          </Text>
         </_Box>
         <_Box>
           <Text color="black900" size="title1">
@@ -55,6 +55,11 @@ export function SpecialScoreCard({
           <Text color="black900" size="title2">
             {daejeonRanges?.['-19']}
           </Text>
+          <Text color="black900" size="title2">
+            {daejeonRanges
+              ? Object.values(daejeonRanges).reduce((acc, cur) => (acc += typeof cur == 'number' ? cur : 0), 0)
+              : 0}
+          </Text>
         </_Box>
         <_Box>
           <Text color="black900" size="title1">
@@ -83,6 +88,11 @@ export function SpecialScoreCard({
           </Text>
           <Text color="black900" size="title2">
             {nationWideRanges?.['-19']}
+          </Text>
+          <Text color="black900" size="title2" width={90}>
+            {nationWideRanges
+              ? Object.values(nationWideRanges).reduce((acc, cur) => (acc += typeof cur == 'number' ? cur : 0), 0)
+              : 0}
           </Text>
         </_Box>
       </_Boxs>
