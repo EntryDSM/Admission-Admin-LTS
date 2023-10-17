@@ -132,20 +132,20 @@ function ReceptionStatus() {
         <CommonScoreCard
           title="일반 전형"
           ranges={['158~170', '145~157', '132~144', '119~131', '106~118', '93-105', '80-92', '-70']}
-          daejeonRanges={staticsScoreData?.[0]}
-          nationWideRanges={staticsScoreData?.[1]}
+          daejeonRanges={staticsScoreData?.[1]}
+          nationWideRanges={staticsScoreData?.[0]}
         />
         <SpecialScoreCard
           title="마이스터 전형"
           ranges={['98-110', '85-97', '72-84', '59-71', '46-58', '33-45', '20-32', '-19']}
-          daejeonRanges={staticsScoreData?.[2]}
-          nationWideRanges={staticsScoreData?.[3]}
+          daejeonRanges={staticsScoreData?.[3]}
+          nationWideRanges={staticsScoreData?.[2]}
         />
         <SpecialScoreCard
           title="사회통합 전형"
           ranges={['98-110', '85-97', '72-84', '59-71', '46-58', '33-45', '20-32', '-19']}
-          daejeonRanges={staticsScoreData?.[4]}
-          nationWideRanges={staticsScoreData?.[5]}
+          daejeonRanges={staticsScoreData?.[5]}
+          nationWideRanges={staticsScoreData?.[4]}
         />
       </div>
     </_Wrapper>
