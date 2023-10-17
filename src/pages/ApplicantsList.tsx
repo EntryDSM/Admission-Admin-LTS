@@ -65,7 +65,9 @@ const ApplicantsList = () => {
           icon="Magnifier"
           type="text"
           placeholder="검색"
-          onChange={(e) => setFilter({ ...filter, name: e.target.value })}
+          onChange={(e) => {
+            setFilter({ ...filter, name: e.target.value }), setPage(0);
+          }}
         />
         <Stack gap={20}>
           <Button color="green" onClick={applicants_check}>
