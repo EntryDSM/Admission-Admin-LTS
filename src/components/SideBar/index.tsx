@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { Text } from '@team-entry/design_system';
+import { Icon, Text } from '@team-entry/design_system';
 
 interface PropsType {
   isOpened: boolean;
@@ -14,7 +14,9 @@ export function SideBar({ isOpened, title, children, close }: PropsType) {
   return (
     <OutsideClickHandler onOutsideClick={close}>
       <_Wrapper className={isOpened ? 'open' : 'close'}>
-        <_EscapeWrapper onClick={close}></_EscapeWrapper>
+        <_EscapeWrapper onClick={close}>
+          <Icon icon="RightArrow" color="black900" size={30} margin={['bottom', 20]} />
+        </_EscapeWrapper>
         <Text color="black900" size="header2">
           {title}
         </Text>
@@ -45,6 +47,6 @@ const _Wrapper = styled.div`
 `;
 
 const _EscapeWrapper = styled.div`
-  height: 24px;
   cursor: pointer;
+  height: 50px;
 `;

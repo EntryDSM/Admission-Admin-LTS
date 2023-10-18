@@ -153,6 +153,7 @@ const ApplicantsList = () => {
       </_THead>
       {application_list?.applicants.map((applicant, idx) => (
         <_TBody
+          isClicked={applicant.receipt_code === +receiptCode}
           onClick={() => {
             setIsOpen((prev) => !prev);
             setReceiptCode(String(applicant.receipt_code));
@@ -196,6 +197,7 @@ const ApplicantsList = () => {
         isOpened={isOpen}
         close={() => {
           setIsOpen(false);
+          setReceiptCode('');
         }}
       >
         <StudentInfo receiptCode={receiptCode} />
@@ -239,14 +241,15 @@ const _THead = styled.div`
   margin-top: 20px;
 `;
 
-const _TBody = styled.div`
+const _TBody = styled.div<{ isClicked: boolean }>`
+  cursor: pointer;
   display: flex;
   gap: 10px;
   width: 100%;
+  background-color: ${({ isClicked }) => (isClicked ? '#EFEFEF' : 'white')};
   border-bottom: 1px solid ${theme.color.black100};
   padding: 20.5px 20px;
-  cursor: pointer;
   &:hover {
-    background-color: ${theme.color.green100};
+    background-color: ${({ isClicked }) => (isClicked ? '#EFEFEF' : theme.color.green100)};
   }
 `;
