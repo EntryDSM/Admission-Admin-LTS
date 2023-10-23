@@ -164,7 +164,7 @@ export const getAdmissionTicket = () => {
   const response = async () => {
     const { data } = await instance.get(`${router}/excel/admission-ticket`, {
       responseType: 'blob',
-      timeout: 20000,
+      timeout: 40000,
     });
     return data;
   };
