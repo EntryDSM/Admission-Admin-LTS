@@ -9,13 +9,16 @@ import {
   getApplicationListExcel,
   getPdfApplicatnsInfo,
 } from '@/utils/api/admin';
-import { IApplicationListRequest } from '@/utils/api/admin/types';
+import { IApplicationListRequest, IGetPdfApplicatnsInfoResponse } from '@/utils/api/admin/types';
 import { applicationTypeToKorean } from '@/utils/translate';
 import PageNation from '@/components/PageNation';
 import { SideBar } from '@/components/SideBar';
 import { StudentInfo } from '@/components/StudentInfo';
 import ApplicantsInfoPDF from '@/components/ApplicantsInfoPDF/ApplicantsInfoPDF';
 import { convert2Pdf } from '@/utils/converToPdf';
+import { usePDF } from 'react-to-pdf';
+import { PDFDownloadLink, Document, Page, View, Text as TXT } from '@react-pdf/renderer';
+import { saveAs } from 'file-saver';
 
 const headText = ['접수번호', '이름', '지역', '전형', '원서 도착 상태', '최종제출'];
 
@@ -47,6 +50,7 @@ const ApplicantsList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [receiptCode, setReceiptCode] = useState('');
   const targetRef = useRef<HTMLDivElement>(null);
+  // const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
 
   const { data: application_list, isLoading } = getApplicationList(filter);
   const { mutate: application_list_excel } = getApplicationListExcel();
@@ -61,13 +65,6 @@ const ApplicantsList = () => {
 
   return (
     <_Wrapper>
-      {pdfApplicatnsInfo && (
-        <div ref={targetRef} style={{ display: 'none' }}>
-          {pdfApplicatnsInfo.map((item) => (
-            <ApplicantsInfoPDF {...item} />
-          ))}
-        </div>
-      )}
       <Text size="header1" color="black900">
         지원자 목록
       </Text>
@@ -91,13 +88,15 @@ const ApplicantsList = () => {
           <Button color="green" onClick={application_list_excel}>
             Excel로 내보내기
           </Button>
-          <Button
-            color="green"
-            onClick={() => convert2Pdf(targetRef, '지원자 자기소개서&학업계획서')}
-            disabled={!targetRef || !pdfApplicatnsInfo}
-          >
-            자소서 & 학업계획서 pdf 내보내기
-          </Button>
+          <PDFDownloadLink document={<Introduce pdfApplicatnsInfo={pdfApplicatnsInfo} />} fileName="somename.pdf">
+            <Button
+              color="green"
+              onClick={() => convert2Pdf(targetRef, 'hi')}
+              disabled={!targetRef || !pdfApplicatnsInfo}
+            >
+              자소서 & 학업계획서 pdf 내보내기
+            </Button>
+          </PDFDownloadLink>
         </div>
       </Stack>
       <Text color="black900" size="title2" margin={[8, 0, 8, 0]}>
@@ -222,11 +221,54 @@ const ApplicantsList = () => {
         <StudentInfo receiptCode={receiptCode} />
       </SideBar>
       {!isLoading && <PageNation pageNum={application_list?.total_pages || 0} current={page} setCurrent={setPage} />}
+      <Introduce pdfApplicatnsInfo={pdfApplicatnsInfo}></Introduce>
+
+      {pdfApplicatnsInfo && pdfApplicatnsInfo.map((item) => <ApplicantsInfoPDF {...item}></ApplicantsInfoPDF>)}
     </_Wrapper>
   );
 };
 
 export default ApplicantsList;
+
+const styles = {
+  table: {
+    display: 'table',
+    width: 'auto',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRightWidth: 0,
+    borderBottomWidth: 0,
+  },
+  tableRow: {
+    margin: 'auto',
+    flexDirection: 'row',
+  },
+  tableCol: {
+    width: '25%',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+  tableCell: {
+    margin: 'auto',
+    marginTop: 5,
+    fontSize: 10,
+  },
+};
+
+const Introduce = ({ pdfApplicatnsInfo }: { pdfApplicatnsInfo?: IGetPdfApplicatnsInfoResponse[] }) => {
+  return (
+    <Document>
+      {pdfApplicatnsInfo &&
+        pdfApplicatnsInfo.map((item) => (
+          <Page size="A4">
+            <ApplicantsInfoPDF {...item} />
+          </Page>
+        ))}
+    </Document>
+  );
+};
 
 const _Wrapper = styled.div`
   display: flex;

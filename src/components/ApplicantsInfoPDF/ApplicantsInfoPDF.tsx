@@ -1,18 +1,33 @@
 import React from 'react';
 import { IGetPdfApplicatnsInfoResponse } from '@/utils/api/admin/types';
 import styled from '@emotion/styled';
+import { PDFDownloadLink, Document, Page, pdf, Text, Font } from '@react-pdf/renderer';
 
 const ApplicantsInfoPDF = ({ ...props }: IGetPdfApplicatnsInfoResponse) => {
+  Font.register({
+    family: 'SpoqaHanSans',
+    src: 'https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@01ff0283e4f36e159ffbf744b36e16ef742da6d8/Subset/SpoqaHanSans/SpoqaHanSansLight.ttf',
+  });
+
   return (
     <>
       <div className="WordSection2">
         <p className="MsoNormal" style={{ textAlign: 'center', margin: 0 }}>
           <b>
-            <span style={{ fontSize: '20px' }}>자기소개서 및 학업계획서</span>
+            <Text style={{ textAlign: 'left', fontSize: '20px', fontFamily: 'SpoqaHanSans' }}>
+              자기소개서 및 학업계획서
+            </Text>
+            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>{props.name}</Text>
+            <Text style={{ textAlign: 'left', fontSize: '20px', fontFamily: 'SpoqaHanSans' }}>자기소개서</Text>
+            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>
+              {props.self_introduce}
+            </Text>
+            <Text style={{ textAlign: 'left', fontSize: '20px', fontFamily: 'SpoqaHanSans' }}>학업계획서</Text>
+            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>{props.study_plan}</Text>
           </b>
         </p>
       </div>
-      <_TABLE style={{ border: '1px solid black', marginBottom: '50px' }}>
+      {/* {/* <_TABLE style={{ border: '1px solid black', marginBottom: '50px' }}>
         <tbody>
           <tr>
             <_TD rowSpan={3} style={{ width: '7%' }}>
@@ -59,24 +74,27 @@ const ApplicantsInfoPDF = ({ ...props }: IGetPdfApplicatnsInfoResponse) => {
             </_TD>
           </tr>
         </tbody>
-      </_TABLE>
-      <_TABLE style={{ marginBottom: '50px' }}>
+      </_TABLE> */}
+      {/* <_TABLE style={{ marginBottom: '50px' }}>
         <tbody>
           <tr>
             <_TD style={{ textAlign: 'left', fontSize: '15.5px' }}>
-              ◎ <b>학업계획서</b>는 자신이 본교를 선택하게 된 구체적인 사유(지원 동기)와 고등학생이 된 후 이루고자 하는
-              <br />
-              목표를 달성하기 위한 학업계획을 상세하게 기술하십시오.
+              <Text>
+                ◎ <b>학업계획서</b>는 자신이 본교를 선택하게 된 구체적인 사유(지원 동기)와 고등학생이 된 후 이루고자
+                하는
+                <br />
+                목표를 달성하기 위한 학업계획을 상세하게 기술하십시오.
+              </Text>
             </_TD>
           </tr>
           <tr>
             <_TD style={{ minHeight: '230px', textAlign: 'left', padding: '0px 7px' }}>
-              <p style={{ lineHeight: '25px' }}>(빈칸 포함 1,600자 이내)</p>
-              <p style={{ minHeight: '230px', wordBreak: 'keep-all', whiteSpace: 'pre-line' }}>{props.study_plan}</p>
+              <Text style={{ lineHeight: '25px' }}>(빈칸 포함 1,600자 이내)</Text>
+              <Text style={{ minHeight: '230px' }}>{props.study_plan}</Text>
             </_TD>
           </tr>
         </tbody>
-      </_TABLE>
+      </_TABLE> */}
     </>
   );
 };
