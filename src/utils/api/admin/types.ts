@@ -112,3 +112,13 @@ export interface IGetScoreStatisticsResponse {
   4: ISpecialScoreDistribution;
   5: ISpecialScoreDistribution;
 }
+
+export type IGetPdfApplicatnsInfoResponse = {
+  name: string;
+  receipt_code: number;
+  telephone_number: string;
+  school_name: string;
+  address: string;
+  self_introduce: string;
+  study_plan: string;
+};

@@ -2,15 +2,14 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Toast } from '@team-entry/design_system';
 import { instance } from '../axios';
 import {
-  IApplicant,
   IApplicationCountRequest,
   IApplicationDetailResponse,
   IApplicationListRequest,
   IApplicationListResponse,
   IGetScoreStatisticsResponse,
+  IGetPdfApplicatnsInfoResponse,
 } from './types';
 import fileSaver from 'file-saver';
-import { Axios, AxiosError } from 'axios';
 
 const router = 'admin';
 
@@ -203,4 +202,12 @@ export const getApplicantsCheck = () => {
       );
     },
   });
+};
+
+export const getPdfApplicatnsInfo = () => {
+  const response = async () => {
+    const { data } = await instance.get(`${router}`);
+    return data;
+  };
+  return useQuery<IGetPdfApplicatnsInfoResponse[]>(['selfStudyText'], response);
 };
