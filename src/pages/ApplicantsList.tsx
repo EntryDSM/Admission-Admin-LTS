@@ -88,7 +88,10 @@ const ApplicantsList = () => {
           <Button color="green" onClick={application_list_excel}>
             Excel로 내보내기
           </Button>
-          <PDFDownloadLink document={<Introduce pdfApplicatnsInfo={pdfApplicatnsInfo} />} fileName="somename.pdf">
+          <PDFDownloadLink
+            document={<Introduce pdfApplicatnsInfo={pdfApplicatnsInfo} />}
+            fileName="자기소개서&학업계획서.pdf"
+          >
             <Button
               color="green"
               onClick={() => convert2Pdf(targetRef, 'hi')}
@@ -221,9 +224,9 @@ const ApplicantsList = () => {
         <StudentInfo receiptCode={receiptCode} />
       </SideBar>
       {!isLoading && <PageNation pageNum={application_list?.total_pages || 0} current={page} setCurrent={setPage} />}
-      <Introduce pdfApplicatnsInfo={pdfApplicatnsInfo}></Introduce>
+      {/* <Introduce pdfApplicatnsInfo={pdfApplicatnsInfo}></Introduce> */}
 
-      {pdfApplicatnsInfo && pdfApplicatnsInfo.map((item) => <ApplicantsInfoPDF {...item}></ApplicantsInfoPDF>)}
+      {/* {pdfApplicatnsInfo && pdfApplicatnsInfo.map((item) => <ApplicantsInfoPDF {...item}></ApplicantsInfoPDF>)} */}
     </_Wrapper>
   );
 };
