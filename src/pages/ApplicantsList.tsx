@@ -88,16 +88,16 @@ const ApplicantsList = () => {
           }}
         >
           <Button color="green" onClick={applicants_check}>
-            지원자 검증 목록 출력
+            지원자 검증 목록
           </Button>
           <Button color="green" onClick={admission_ticket_excel}>
-            수험표 출력
+            수험표
           </Button>
           <Button color="green" onClick={application_list_excel}>
-            지원자 목록 Excel로 내보내기
+            지원자 목록 Excel
           </Button>
           <Button color="green" onClick={applicants_code_execl}>
-            지원자 코드 목록 Excel로 내보내기
+            지원자 코드 목록 Excel
           </Button>
           <PDFDownloadLink
             document={<Introduce pdfApplicatnsInfo={pdfApplicatnsInfo} />}
@@ -108,7 +108,7 @@ const ApplicantsList = () => {
               onClick={() => convert2Pdf(targetRef, 'hi')}
               disabled={!targetRef || !pdfApplicatnsInfo}
             >
-              자소서 & 학업계획서 pdf 내보내기
+              자소서 & 학업계획서 pdf
             </Button>
           </PDFDownloadLink>
         </div>
