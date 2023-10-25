@@ -5,6 +5,7 @@ import {
   changeArrivedStatus,
   getAdmissionTicket,
   getApplicantsCheck,
+  getApplicantsCodeExecl,
   getApplicationList,
   getApplicationListExcel,
   getPdfApplicatnsInfo,
@@ -50,7 +51,6 @@ const ApplicantsList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [receiptCode, setReceiptCode] = useState('');
   const targetRef = useRef<HTMLDivElement>(null);
-  // const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
 
   const { data: application_list, isLoading } = getApplicationList(filter);
   const { mutate: application_list_excel } = getApplicationListExcel();
@@ -58,6 +58,7 @@ const ApplicantsList = () => {
   const { mutate: change_arrived_status } = changeArrivedStatus();
   const { mutate: applicants_check } = getApplicantsCheck();
   const { data: pdfApplicatnsInfo } = getPdfApplicatnsInfo();
+  const { mutate: applicants_code_execl } = getApplicantsCodeExecl();
 
   useEffect(() => {
     setFilter((prev) => ({ ...prev, page }));
@@ -78,7 +79,14 @@ const ApplicantsList = () => {
             setFilter({ ...filter, name: e.target.value }), setPage(0);
           }}
         />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, minmax(100px, auto))',
+            gap: '20px',
+            width: '600px',
+          }}
+        >
           <Button color="green" onClick={applicants_check}>
             지원자 검증 목록 출력
           </Button>
@@ -86,7 +94,10 @@ const ApplicantsList = () => {
             수험표 출력
           </Button>
           <Button color="green" onClick={application_list_excel}>
-            Excel로 내보내기
+            지원자 목록 Excel로 내보내기
+          </Button>
+          <Button color="green" onClick={applicants_code_execl}>
+            지원자 코드 목록 Excel로 내보내기
           </Button>
           <PDFDownloadLink
             document={<Introduce pdfApplicatnsInfo={pdfApplicatnsInfo} />}

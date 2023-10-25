@@ -211,3 +211,25 @@ export const getPdfApplicatnsInfo = () => {
   };
   return useQuery<IGetPdfApplicatnsInfoResponse[]>(['selfStudyText'], response);
 };
+
+/** 지원자 코드 목록 엑셀 출력 */
+export const getApplicantsCodeExecl = () => {
+  const response = async () => {
+    const { data } = await instance.get(`${router}/excel/applicants/code`, {
+      responseType: 'blob',
+    });
+    return data;
+  };
+
+  const date = new Date();
+
+  return useMutation(response, {
+    onSuccess: (res) => {
+      fileSaver.saveAs(
+        res,
+        `지원자코드_${date.getMonth() + 1}월${date.getDate()}일_${date.getHours()}시${date.getMinutes()}분`,
+      );
+    },
+    onError: () => Toast('지원자 코드 목록 엑셀 출력에 실패하였습니다.', { type: 'error' }),
+  });
+};
