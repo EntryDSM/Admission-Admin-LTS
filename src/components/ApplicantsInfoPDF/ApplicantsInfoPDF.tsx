@@ -14,33 +14,81 @@ const ApplicantsInfoPDF = ({ ...props }: IGetPdfApplicatnsInfoResponse) => {
       <div className="WordSection2">
         <p className="MsoNormal" style={{ textAlign: 'center', margin: 0 }}>
           <b>
-            <Text style={{ textAlign: 'left', fontSize: '20px', fontFamily: 'SpoqaHanSans' }}>
-              자기소개서 및 학업계획서
+            <Text
+              style={{
+                textAlign: 'left',
+                fontSize: '16px',
+                fontFamily: 'SpoqaHanSans',
+                margin: '0 10px',
+              }}
+            >
+              인적사항
             </Text>
-            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>이름: {props.name}</Text>
-            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>
-              접수 번호: {props.receipt_code}
-            </Text>
-            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>
-              주소: {props.address}
-            </Text>
+            <div style={{ margin: '0 10px', border: '1px solid black' }}>
+              <Text style={{ textAlign: 'left', fontSize: '12px', fontFamily: 'SpoqaHanSans' }}>
+                이름: {props.name}
+              </Text>
+              <Text style={{ textAlign: 'left', fontSize: '12px', fontFamily: 'SpoqaHanSans' }}>
+                접수 번호: {props.receipt_code}
+              </Text>
+              <Text style={{ textAlign: 'left', fontSize: '12px', fontFamily: 'SpoqaHanSans' }}>
+                주소: {props.address}
+              </Text>
+              <Text style={{ textAlign: 'left', fontSize: '12px', fontFamily: 'SpoqaHanSans' }}>
+                학교 이름: {props.school_name}
+              </Text>
+              <Text style={{ textAlign: 'left', fontSize: '12px', fontFamily: 'SpoqaHanSans' }}>
+                전화번호: {props.telephone_number}
+              </Text>
+            </div>
             <br />
-            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>
-              학교 이름: {props.school_name}
-            </Text>
-            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>
-              전화번호: {props.telephone_number}
-            </Text>
             <br />
-            <br />
-            <Text style={{ textAlign: 'left', fontSize: '20px', fontFamily: 'SpoqaHanSans' }}>자기소개서</Text>
-            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>
+            <Text
+              style={{
+                textAlign: 'left',
+                fontSize: '16px',
+                fontFamily: 'SpoqaHanSans',
+                margin: '0 10px',
+              }}
+            >
+              자기소개서
+            </Text>
+            <Text
+              style={{
+                textAlign: 'left',
+                fontSize: '10px',
+                fontFamily: 'SpoqaHanSans',
+                border: '1px solid black',
+                padding: '10px 20px',
+                margin: '0 10px',
+              }}
+            >
               {props.self_introduce}
             </Text>
             <br />
             <br />
-            <Text style={{ textAlign: 'left', fontSize: '20px', fontFamily: 'SpoqaHanSans' }}>학업계획서</Text>
-            <Text style={{ textAlign: 'left', fontSize: '10px', fontFamily: 'SpoqaHanSans' }}>{props.study_plan}</Text>
+            <Text
+              style={{
+                textAlign: 'left',
+                fontSize: '16px',
+                fontFamily: 'SpoqaHanSans',
+                margin: '0 10px',
+              }}
+            >
+              학업계획서
+            </Text>
+            <Text
+              style={{
+                textAlign: 'left',
+                fontSize: '10px',
+                fontFamily: 'SpoqaHanSans',
+                border: '1px solid black',
+                padding: '10px 20px',
+                margin: '0 10px',
+              }}
+            >
+              {props.study_plan}
+            </Text>
           </b>
         </p>
       </div>
