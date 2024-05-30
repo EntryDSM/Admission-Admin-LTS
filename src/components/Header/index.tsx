@@ -51,7 +51,7 @@ const Header = () => {
             })}
           </_._Texts>
         </Stack>
-        {cookie.get('access_token') ? (
+        {cookie.get('accessToken') ? (
           <Stack align="center">
             <Button color="green" onClick={() => (window.location.href = 'https://www.entrydsm.hs.kr')}>
               메인으로

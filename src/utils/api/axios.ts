@@ -11,7 +11,7 @@ const cookie = new Cookies();
 
 instance.interceptors.request.use(
   (config) => {
-    const accessToken = cookie.get('access_token');
+    const accessToken = cookie.get('accessToken');
     const returnConfig = {
       ...config,
     };
@@ -30,7 +30,7 @@ instance.interceptors.response.use(
   async (error: AxiosError<AxiosError>) => {
     if (axios.isAxiosError(error) && error.response) {
       const { config } = error;
-      const refreshToken = cookie.get('refresh_token');
+      const refreshToken = cookie.get('refreshToken');
 
       if (
         error.response.data.message === 'Invalid Token' ||
@@ -42,16 +42,16 @@ instance.interceptors.response.use(
         if (refreshToken) {
           ReissueToken(refreshToken)
             .then((res) => {
-              cookie.set('access_token', res.access_token, { path: '/' });
-              cookie.set('refresh_token', res.refresh_token, { path: '/' });
+              cookie.set('accessToken', res.accessToken, { path: '/' });
+              cookie.set('refreshToken', res.refreshToken, { path: '/' });
               if (originalRequest) {
-                if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.access_token}`;
+                if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.accessToken}`;
                 return axios(originalRequest);
               }
             })
             .catch(() => {
-              cookie.remove('access_token');
-              cookie.remove('refresh_token');
+              cookie.remove('accessToken');
+              cookie.remove('refreshToken');
               window.location.replace(
                 'https://auth.entrydsm.hs.kr/admin-login?redirect_url=https://admin.entrydsm.hs.kr',
               );

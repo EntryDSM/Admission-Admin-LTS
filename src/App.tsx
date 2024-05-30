@@ -5,8 +5,8 @@ import { Cookies } from 'react-cookie';
 
 function App() {
   const cookie = new Cookies();
-  const accessToken = cookie.get('access_token');
-  const refreshToken = cookie.get('refresh_token');
+  const accessToken = cookie.get('accessToken');
+  const refreshToken = cookie.get('refreshToken');
   const authority = cookie.get('authority');
   useEffect(() => {
     if (!accessToken || !refreshToken) {

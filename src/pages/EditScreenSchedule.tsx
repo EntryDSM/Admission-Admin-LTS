@@ -166,35 +166,35 @@ const EditScreenSchedule = () => {
             mutate([
               {
                 type: 'START_DATE',
-                date: `2023-${startDropDown[0][0].slice(0, 2)}-${startDropDown[0][1].slice(
+                date: `2024-${startDropDown[0][0].slice(0, 2)}-${startDropDown[0][1].slice(
                   0,
                   2,
                 )}T${startDropDown[0][2].slice(0, 2)}:${startDropDown[0][3].slice(0, 2)}:00`,
               },
               {
                 type: 'END_DATE',
-                date: `2023-${endDropDown[0][0].slice(0, 2)}-${endDropDown[0][1].slice(0, 2)}T${endDropDown[0][2].slice(
+                date: `2024-${endDropDown[0][0].slice(0, 2)}-${endDropDown[0][1].slice(0, 2)}T${endDropDown[0][2].slice(
                   0,
                   2,
                 )}:${endDropDown[0][3].slice(0, 2)}:00`,
               },
               {
                 type: 'FIRST_ANNOUNCEMENT',
-                date: `2023-${startDropDown[1][0].slice(0, 2)}-${startDropDown[1][1].slice(
+                date: `2024-${startDropDown[1][0].slice(0, 2)}-${startDropDown[1][1].slice(
                   0,
                   2,
                 )}T${startDropDown[1][2].slice(0, 2)}:${startDropDown[1][3].slice(0, 2)}:00`,
               },
               {
                 type: 'INTERVIEW',
-                date: `2023-${startDropDown[2][0].slice(0, 2)}-${startDropDown[2][1].slice(
+                date: `2024-${startDropDown[2][0].slice(0, 2)}-${startDropDown[2][1].slice(
                   0,
                   2,
                 )}T${startDropDown[2][2].slice(0, 2)}:${startDropDown[2][3].slice(0, 2)}:00`,
               },
               {
                 type: 'SECOND_ANNOUNCEMENT',
-                date: `2023-${startDropDown[3][0].slice(0, 2)}-${startDropDown[3][1].slice(
+                date: `2024-${startDropDown[3][0].slice(0, 2)}-${startDropDown[3][1].slice(
                   0,
                   2,
                 )}T${startDropDown[3][2].slice(0, 2)}:${startDropDown[3][3].slice(0, 2)}:00`,
