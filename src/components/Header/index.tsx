@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import Logo from '../../assets/Logo.svg';
 import { Cookies } from 'react-cookie';
+import { ADMIN_URL, AUTH_URL, MAIN_URL } from '@/constant/env';
 
 type THeader = '전형 일정 수정' | '접수 현황' | '정원 수정' | '지원자 목록' | '';
 
@@ -53,7 +54,7 @@ const Header = () => {
         </Stack>
         {cookie.get('accessToken') ? (
           <Stack align="center">
-            <Button color="green" onClick={() => (window.location.href = 'https://www.entrydsm.hs.kr')}>
+            <Button color="green" onClick={() => (window.location.href = `${MAIN_URL}`)}>
               메인으로
             </Button>
             {/* <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
@@ -66,8 +67,7 @@ const Header = () => {
             color="green"
             kind="rounded"
             onClick={() => {
-              window.location.href =
-                'https://auth.entrydsm.hs.kr/admin-login/login?redirect_url=https://admin.entrydsm.hs.kr';
+              window.location.href = `${AUTH_URL}/admin-login/login?redirect_url=${ADMIN_URL}`;
             }}
           >
             로그인

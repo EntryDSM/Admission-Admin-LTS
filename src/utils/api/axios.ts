@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { Cookies } from 'react-cookie';
 import { ReissueToken } from './user';
+import { ADMIN_URL, AUTH_URL } from '@/constant/env';
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -52,13 +53,11 @@ instance.interceptors.response.use(
             .catch(() => {
               cookie.remove('accessToken');
               cookie.remove('refreshToken');
-              window.location.replace(
-                'https://auth.entrydsm.hs.kr/admin-login?redirect_url=https://admin.entrydsm.hs.kr',
-              );
+              window.location.replace(`${AUTH_URL}/admin-login?redirect_url=${ADMIN_URL}`);
             });
         } else {
           alert('로그인 후 이용해주세요');
-          window.location.replace('https://auth.entrydsm.hs.kr/admin-login?redirect_url=https://admin.entrydsm.hs.kr');
+          window.location.replace(`${AUTH_URL}/admin-login?redirect_url=${ADMIN_URL}`);
         }
       } else return Promise.reject(error);
     }
