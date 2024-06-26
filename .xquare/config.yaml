@@ -1,0 +1,7 @@
+config:
+  name: entry-admin-admission-lts
+  service_type: fe
+  port: 3001
+  domain:
+    prod: entry-admin-admission.xquare.app
+    stag: entry-admin-admission-stag.xquare.app
