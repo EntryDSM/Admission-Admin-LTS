@@ -3,5 +3,5 @@ config:
   service_type: fe
   port: 3001
   domain:
-    prod: entry-admission-admin.xquare.app
-    stag: entry-admission-admin-stag.xquare.app
+    prod: admin.entrydsm.hs.kr
+    stag: admin-stag.entrydsm.hs.kr
