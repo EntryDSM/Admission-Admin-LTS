@@ -32,7 +32,7 @@ export const getApplicationList = ({
 }: IApplicationListRequest) => {
   const response = async () => {
     const { data } = await instance.get(
-      `${router}/applicants?size=${size}&page=${page}&isDaejeon=${isDaejeon}&isNationwide=${isNationWide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
+      `${router}/application/applicants?size=${size}&page=${page}&isDaejeon=${isDaejeon}&isNationwide=${isNationWide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
     );
     return data;
   };
@@ -93,7 +93,7 @@ export const getApplicationCount = () => {
 /** 접수 현황 집계(점수) */
 export const getStaticsScore = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/statics/score`);
+    const { data } = await instance.get(`${router}/application/statics/score`);
     return data;
   };
 
@@ -103,7 +103,7 @@ export const getStaticsScore = () => {
 /** 접수 현황 집계(지원자) */
 export const getStaticCounts = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/statics/count`);
+    const { data } = await instance.get(`${router}/application/statics/count`);
     return data;
   };
   return useQuery<IApplicationCountRequest[]>(['staticCount'], response);

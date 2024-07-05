@@ -24,19 +24,19 @@ export interface IApplicationListResponse {
 }
 
 export interface IApplicant {
-  receipt_code: number;
+  receiptCode: number;
   name: string;
   email: string;
-  is_daejeon: boolean;
-  application_type: ApplicationType;
-  is_prints_arrived: boolean;
-  is_submitted: boolean;
-  headcount: HeadCountType;
+  isDaejeon: boolean;
+  applicationType: ApplicationType;
+  isPrintsArrived: boolean;
+  isSubmitted: boolean;
+  isOutOfHeadcount: boolean;
 }
 
 export interface IApplicationCountRequest {
-  application_type: ApplicationType;
-  is_daejeon: boolean;
+  applicationType: ApplicationType;
+  isDaejeon: boolean;
   count: number;
 }
 
@@ -78,29 +78,45 @@ export interface IApplicationDetailResponse {
 
 //특별전형 점수
 export interface ISpecialScoreDistribution {
-  '98-110': number;
-  '85-97': number;
-  '72-84': number;
-  '59-71': number;
-  '46-58': number;
-  '33-45': number;
-  '20-32': number;
-  '-19': number;
+  firstRate: number;
+  secondRate: number;
+  thirdRate: number;
+  fourthRate: number;
+  fifthRate: number;
+  sixthRate: number;
+  seventhRate: number;
+  eighthRate: number;
+  // '98-110': number;
+  // '85-97': number;
+  // '72-84': number;
+  // '59-71': number;
+  // '46-58': number;
+  // '33-45': number;
+  // '20-32': number;
+  // '-19': number;
   application_type: 'MEISTER' | 'SOCIAL';
   daejeon: boolean;
 }
 
 //일반전형 점수
 export interface ICommonScoreDistribution {
-  '158-170': number;
-  '145-157': number;
-  '132-144': number;
-  '119-131': number;
-  '106-118': number;
-  '93-105': number;
-  '80-92': number;
-  '-79': number;
-  application_type: 'COMMON';
+  firstRate: number;
+  secondRate: number;
+  thirdRate: number;
+  fourthRate: number;
+  fifthRate: number;
+  sixthRate: number;
+  seventhRate: number;
+  eighthRate: number;
+  // '158-170': number;
+  // '145-157': number;
+  // '132-144': number;
+  // '119-131': number;
+  // '106-118': number;
+  // '93-105': number;
+  // '80-92': number;
+  // '-79': number;
+  applicationType: 'COMMON';
   daejeon: boolean;
 }
 
