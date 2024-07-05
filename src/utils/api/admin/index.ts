@@ -18,7 +18,7 @@ export const getApplicationList = ({
   size,
   page,
   isDaejeon,
-  isNationWide,
+  isNationwide,
   isSubmitted,
   isNotSubmitted,
   inOfHeadcount,
@@ -32,7 +32,7 @@ export const getApplicationList = ({
 }: IApplicationListRequest) => {
   const response = async () => {
     const { data } = await instance.get(
-      `${router}/application/applicants?size=${size}&page=${page}&isDaejeon=${isDaejeon}&isNationwide=${isNationWide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
+      `${router}/application/applicants?size=${size}&page=${page}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
     );
     return data;
   };
@@ -42,7 +42,7 @@ export const getApplicationList = ({
       size,
       page,
       isDaejeon,
-      isNationWide,
+      isNationwide,
       isSubmitted,
       isNotSubmitted,
       inOfHeadcount,
@@ -61,7 +61,7 @@ export const getApplicationList = ({
 /** 지원자 세부 정보 */
 export const getApplicantDetail = (id: string) => {
   const resposne = async () => {
-    const { data } = await instance.get(`${router}/applicant/${id}`);
+    const { data } = await instance.get(`${router}/application/${id}`);
     return data;
   };
   return useQuery<IApplicationDetailResponse>(['applicationList', id], resposne, { enabled: !!id });
@@ -215,7 +215,7 @@ export const getPdfApplicatnsInfo = () => {
 /** 지원자 코드 목록 엑셀 출력 */
 export const getApplicantsCodeExecl = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/excel/applicants/code`, {
+    const { data } = await instance.get(`${router}/application/excel/applicants/code`, {
       responseType: 'blob',
     });
     return data;

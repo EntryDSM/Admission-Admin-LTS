@@ -4,14 +4,14 @@ export interface IApplicationListRequest {
   size: number;
   page: number;
   isDaejeon: boolean;
-  isNationWide: boolean;
+  isNationwide: boolean;
   isSubmitted: boolean;
   isNotSubmitted: boolean;
-  inOfHeadcount: boolean;
-  outOfHeadcount: boolean;
   isCommon: boolean;
   isMeister: boolean;
   isSocial: boolean;
+  inOfHeadcount: boolean;
+  outOfHeadcount: boolean;
   receiptCode: string;
   schoolName: string;
   name: string;
@@ -26,12 +26,13 @@ export interface IApplicationListResponse {
 export interface IApplicant {
   receiptCode: number;
   name: string;
-  email: string;
+  telephoneNumber: string;
   isDaejeon: boolean;
   applicationType: ApplicationType;
   isPrintsArrived: boolean;
   isSubmitted: boolean;
   isOutOfHeadcount: boolean;
+  // headcount: HeadCountType;
 }
 
 export interface IApplicationCountRequest {
@@ -42,37 +43,36 @@ export interface IApplicationCountRequest {
 
 export interface IApplicationDetailResponse {
   status: {
-    is_printed_arrived: boolean;
-    is_submitted: boolean;
+    isPrintedArrived: boolean;
+    isSubmit: boolean;
   };
-  common_information: {
+  commonInformation: {
     name: string;
-    school_name: string;
-    email: string;
-    telephone_number: string;
-    school_tel: string;
-    parent_tel: string;
+    schoolName: string;
+    telephoneNumber: string;
+    schoolTel: string;
+    parentTel: string;
   };
-  more_information: {
-    photo_url: string;
-    birthday: string;
-    education_status: EducationStatusType;
-    application_type: ApplicationType;
-    application_remark: '';
+  moreInformation: {
+    photoUrl: string;
+    birthDay: string;
+    educationalStatus: EducationStatusType;
+    applicationType: ApplicationType;
+    applicationRemark: '';
     address: string;
-    detail_address: string;
-    head_count: boolean;
+    detailAddress: string;
+    headCount: boolean;
   };
   evaluation: {
-    volunteer_time: number;
-    conversion_score: number;
-    day_absence_count: number;
-    lecture_absence_count: number;
-    early_leave_count: number;
-    lateness_count: number;
-    average_score: number;
-    self_introduce: string;
-    study_plan: string;
+    volunteerTime: number;
+    conversionScore: number;
+    dayAbsenceCount: number;
+    lectureAbsenceCount: number;
+    earlyLeaveCount: number;
+    latenessCount: number;
+    averageScore: number;
+    selfIntroduce: string;
+    studyPlan: string;
   };
 }
 

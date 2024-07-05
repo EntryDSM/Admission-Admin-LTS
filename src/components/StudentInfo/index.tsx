@@ -17,9 +17,9 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
   const [isIntroduce, setIsIntroduce] = useState(true);
   return (
     <>
-      {applciation_detail?.status.is_submitted ? (
+      {applciation_detail?.status.isSubmit ? (
         <VStack>
-          <_Img src={'data:image/png;base64,' + applciation_detail?.more_information.photo_url} alt="" />
+          <_Img src={'data:image/png;base64,' + applciation_detail?.moreInformation.photoUrl} alt="" />
           <Grid>
             <VStack gap={10}>
               <HStack align="center" gap={20}>
@@ -27,7 +27,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   이름
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.common_information.name}
+                  {applciation_detail?.commonInformation.name}
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -35,7 +35,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   생년월일
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.more_information.birthday}
+                  {applciation_detail?.moreInformation.birthDay}
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -43,7 +43,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   주소
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.more_information.address}
+                  {applciation_detail?.moreInformation.address}
                 </Text>
               </HStack>
               <HR />
@@ -55,7 +55,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   학교 이름
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.common_information.school_name}
+                  {applciation_detail?.commonInformation.schoolName}
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -63,7 +63,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   졸업 상태
                 </Text>
                 <Text color="black900" size="body2">
-                  {educationStatusTypeToKorean[applciation_detail?.more_information.education_status]}
+                  {educationStatusTypeToKorean[applciation_detail?.moreInformation.educationalStatus]}
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -71,7 +71,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   전형
                 </Text>
                 <Text color="black900" size="body2">
-                  {applicationTypeToKorean[applciation_detail?.more_information.application_type]}
+                  {applicationTypeToKorean[applciation_detail?.moreInformation.applicationType]}
                 </Text>
               </HStack>
               <HR />
@@ -83,7 +83,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   이메일
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.common_information.email}
+                  {applciation_detail?.commonInformation.telephoneNumber}
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -91,7 +91,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   학생 본인 연락처
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.common_information.telephone_number}
+                  {applciation_detail?.commonInformation.telephoneNumber}
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -99,7 +99,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   부모님 연락처
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.common_information.parent_tel}
+                  {applciation_detail?.commonInformation.parentTel}
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -107,7 +107,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   학교 연락처
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.common_information.school_tel}
+                  {applciation_detail?.commonInformation.schoolTel}
                 </Text>
               </HStack>
             </VStack>
@@ -120,7 +120,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   봉사시간
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.evaluation.volunteer_time}시간
+                  {applciation_detail?.evaluation.volunteerTime}시간
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -128,7 +128,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   성적 점수
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.evaluation.conversion_score}점
+                  {applciation_detail?.evaluation.conversionScore}점
                 </Text>
               </HStack>
               <HR />
@@ -140,7 +140,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   무단 결석 일수
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.evaluation.day_absence_count}점
+                  {applciation_detail?.evaluation.dayAbsenceCount}점
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -148,7 +148,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   무단 조퇴 일수
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.evaluation.early_leave_count}일
+                  {applciation_detail?.evaluation.earlyLeaveCount}일
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -156,7 +156,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   무단 결과 일수
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.evaluation.lecture_absence_count}점
+                  {applciation_detail?.evaluation.lectureAbsenceCount}점
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -164,7 +164,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   무단 지각 일수
                 </Text>
                 <Text color="black900" size="body2">
-                  {applciation_detail?.evaluation.lateness_count}일
+                  {applciation_detail?.evaluation.latenessCount}일
                 </Text>
               </HStack>
             </VStack>
@@ -190,7 +190,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
             </Button>
           </HStack>
           <Text color="black900" size="body2">
-            {isIntroduce ? applciation_detail?.evaluation.self_introduce : applciation_detail?.evaluation.study_plan}
+            {isIntroduce ? applciation_detail?.evaluation.selfIntroduce : applciation_detail?.evaluation.studyPlan}
           </Text>
         </VStack>
       ) : (
@@ -204,7 +204,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 이름
               </Text>
               <Text color="black900" size="body3">
-                {applciation_detail?.common_information.name}
+                {applciation_detail?.commonInformation.name}
               </Text>
             </HStack>
             <HStack gap={20} align="center">
@@ -212,7 +212,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 학교 이름
               </Text>
               <Text color="black900" size="body3">
-                {applciation_detail?.common_information.school_name}
+                {applciation_detail?.commonInformation.schoolName}
               </Text>
             </HStack>
             <HStack gap={20} align="center">
@@ -220,7 +220,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 이메일
               </Text>
               <Text color="black900" size="body3">
-                {applciation_detail?.common_information.email}
+                {applciation_detail?.commonInformation.telephoneNumber}
               </Text>
             </HStack>
             <HStack gap={20} align="center">
@@ -228,7 +228,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 학생 본인 연락처
               </Text>
               <Text color="black900" size="body3">
-                {phone_number(String(applciation_detail?.common_information.telephone_number))}
+                {phone_number(String(applciation_detail?.commonInformation.telephoneNumber))}
               </Text>
             </HStack>
             <HStack gap={20} align="center">
@@ -236,7 +236,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 부모님 연락처
               </Text>
               <Text color="black900" size="body3">
-                {phone_number(String(applciation_detail?.common_information.parent_tel))}
+                {phone_number(String(applciation_detail?.commonInformation.parentTel))}
               </Text>
             </HStack>
             <HStack gap={20} align="center">
@@ -244,7 +244,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 학교 전화번호
               </Text>
               <Text color="black900" size="body3">
-                {phone_number(String(applciation_detail?.common_information.school_tel))}
+                {phone_number(String(applciation_detail?.commonInformation.schoolTel))}
               </Text>
             </HStack>
           </VStack>
