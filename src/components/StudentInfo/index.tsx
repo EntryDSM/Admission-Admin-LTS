@@ -19,7 +19,7 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
     <>
       {applciation_detail?.status.isSubmit ? (
         <VStack>
-          <_Img src={'data:image/png;base64,' + applciation_detail?.moreInformation.photoUrl} alt="" />
+          <_Img src={applciation_detail?.moreInformation.photoUrl} alt="" />
           <Grid>
             <VStack gap={10}>
               <HStack align="center" gap={20}>
@@ -78,14 +78,6 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
               <Text color="black900" size="title2">
                 지원 정보
               </Text>
-              <HStack align="center" gap={20}>
-                <Text color="black900" size="body1">
-                  이메일
-                </Text>
-                <Text color="black900" size="body2">
-                  {applciation_detail?.commonInformation.telephoneNumber}
-                </Text>
-              </HStack>
               <HStack align="center" gap={20}>
                 <Text color="black900" size="body1">
                   학생 본인 연락처
@@ -213,14 +205,6 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
               </Text>
               <Text color="black900" size="body3">
                 {applciation_detail?.commonInformation.schoolName}
-              </Text>
-            </HStack>
-            <HStack gap={20} align="center">
-              <Text color="black900" size="body1">
-                이메일
-              </Text>
-              <Text color="black900" size="body3">
-                {applciation_detail?.commonInformation.telephoneNumber}
               </Text>
             </HStack>
             <HStack gap={20} align="center">

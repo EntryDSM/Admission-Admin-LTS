@@ -48,9 +48,9 @@ export interface IApplicationDetailResponse {
   };
   commonInformation: {
     name: string;
-    schoolName: string;
+    schoolName: string | null;
     telephoneNumber: string;
-    schoolTel: string;
+    schoolTel: string | null;
     parentTel: string;
   };
   moreInformation: {
@@ -58,10 +58,10 @@ export interface IApplicationDetailResponse {
     birthDay: string;
     educationalStatus: EducationStatusType;
     applicationType: ApplicationType;
-    applicationRemark: '';
+    applicationRemark: string | null;
     address: string;
     detailAddress: string;
-    headCount: boolean;
+    headCount: boolean | null;
   };
   evaluation: {
     volunteerTime: number;

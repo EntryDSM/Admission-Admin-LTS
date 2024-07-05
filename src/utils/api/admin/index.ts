@@ -140,7 +140,7 @@ export const changeArrivedStatus = () => {
     is_prints_arrived: boolean;
   }) => {
     const { data } = await instance.patch(
-      `${router}/application/prints-arrived/${receipt_code}?is_prints_arrived=${is_prints_arrived}`,
+      `${router}/status/prints-arrived/${receipt_code}?is_prints_arrived=${is_prints_arrived}`,
     );
     return data;
   };
