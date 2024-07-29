@@ -32,28 +32,28 @@ export function SpecialScoreCard({ title, ranges, daejeonRanges, nationWideRange
             대전
           </Text>
           <Text color="black900" size="title2">
-            {daejeonRanges?.['98-110']}
+            {daejeonRanges?.firstRate}
           </Text>
           <Text color="black900" size="title2">
-            {daejeonRanges?.['85-97']}
+            {daejeonRanges?.secondRate}
           </Text>
           <Text color="black900" size="title2">
-            {daejeonRanges?.['72-84']}
+            {daejeonRanges?.thirdRate}
           </Text>
           <Text color="black900" size="title2">
-            {daejeonRanges?.['59-71']}
+            {daejeonRanges?.fourthRate}
           </Text>
           <Text color="black900" size="title2">
-            {daejeonRanges?.['46-58']}
+            {daejeonRanges?.fifthRate}
           </Text>
           <Text color="black900" size="title2">
-            {daejeonRanges?.['33-45']}
+            {daejeonRanges?.sixthRate}
           </Text>
           <Text color="black900" size="title2">
-            {daejeonRanges?.['20-32']}
+            {daejeonRanges?.seventhRate}
           </Text>
           <Text color="black900" size="title2">
-            {daejeonRanges?.['-19']}
+            {daejeonRanges?.eighthRate}
           </Text>
           <Text color="black900" size="title2">
             {daejeonRanges
@@ -66,28 +66,28 @@ export function SpecialScoreCard({ title, ranges, daejeonRanges, nationWideRange
             전국
           </Text>
           <Text color="black900" size="title2">
-            {nationWideRanges?.['98-110']}
+            {nationWideRanges?.firstRate}
           </Text>
           <Text color="black900" size="title2">
-            {nationWideRanges?.['85-97']}
+            {nationWideRanges?.secondRate}
           </Text>
           <Text color="black900" size="title2">
-            {nationWideRanges?.['72-84']}
+            {nationWideRanges?.thirdRate}
           </Text>
           <Text color="black900" size="title2">
-            {nationWideRanges?.['59-71']}
+            {nationWideRanges?.fourthRate}
           </Text>
           <Text color="black900" size="title2">
-            {nationWideRanges?.['46-58']}
+            {nationWideRanges?.fifthRate}
           </Text>
           <Text color="black900" size="title2">
-            {nationWideRanges?.['33-45']}
+            {nationWideRanges?.sixthRate}
           </Text>
           <Text color="black900" size="title2">
-            {nationWideRanges?.['20-32']}
+            {nationWideRanges?.seventhRate}
           </Text>
           <Text color="black900" size="title2">
-            {nationWideRanges?.['-19']}
+            {nationWideRanges?.eighthRate}
           </Text>
           <Text color="black900" size="title2" width={90}>
             {nationWideRanges

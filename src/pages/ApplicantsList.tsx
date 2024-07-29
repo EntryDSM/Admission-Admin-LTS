@@ -18,7 +18,7 @@ import { StudentInfo } from '@/components/StudentInfo';
 import ApplicantsInfoPDF from '@/components/ApplicantsInfoPDF/ApplicantsInfoPDF';
 import { convert2Pdf } from '@/utils/converToPdf';
 import { usePDF } from 'react-to-pdf';
-import { PDFDownloadLink, Document, Page, View, Text as TXT } from '@react-pdf/renderer';
+import { PDFDownloadLink, Document, Page, View } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 
 const headText = ['접수번호', '이름', '지역', '전형', '원서 도착 상태', '최종제출'];
@@ -28,7 +28,7 @@ const ApplicantsList = () => {
     size: 10,
     page: 0,
     isDaejeon: false,
-    isNationWide: false,
+    isNationwide: false,
     isSubmitted: false,
     isNotSubmitted: false,
     inOfHeadcount: false,
@@ -127,10 +127,10 @@ const ApplicantsList = () => {
         />
         <Checkbox
           color="green"
-          isChecked={filter.isNationWide}
+          isChecked={filter.isNationwide}
           value=""
           label="전국"
-          name="isNationWide"
+          name="isNationwide"
           onClick={onChangeCheckBox}
         />
         <_Line />
@@ -185,23 +185,23 @@ const ApplicantsList = () => {
       </_THead>
       {application_list?.applicants.map((applicant, idx) => (
         <_TBody
-          isClicked={applicant.receipt_code === +receiptCode}
+          isClicked={applicant.receiptCode === +receiptCode}
           onClick={() => {
             setIsOpen((prev) => !prev);
-            setReceiptCode(String(applicant.receipt_code));
+            setReceiptCode(String(applicant.receiptCode));
           }}
         >
           <Text align="center" width={110} color="black800" size="body3">
-            {applicant.receipt_code}
+            {applicant.receiptCode}
           </Text>
           <Text align="center" width={110} color="black800" size="body3">
             {applicant.name}
           </Text>
           <Text align="center" width={110} color="black800" size="body3">
-            {applicant.is_daejeon ? '대전' : '전국'}
+            {applicant.isDaejeon ? '대전' : '전국'}
           </Text>
           <Text align="center" width={110} color="black800" size="body3">
-            {applicationTypeToKorean[applicant.application_type]} 전형
+            {applicationTypeToKorean[applicant.applicationType]} 전형
           </Text>
           <Stack width={110} justify="center">
             <Checkbox
@@ -211,16 +211,16 @@ const ApplicantsList = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 change_arrived_status({
-                  receipt_code: applicant.receipt_code,
-                  is_prints_arrived: !applicant.is_prints_arrived,
+                  receipt_code: applicant.receiptCode,
+                  is_prints_arrived: !applicant.isPrintsArrived,
                 });
               }}
               value=""
-              isChecked={applicant.is_prints_arrived}
+              isChecked={applicant.isPrintsArrived}
             />
           </Stack>
           <Text align="center" width={110} color="black800" size="body3">
-            {applicant.is_submitted ? '완료' : '미완료'}
+            {applicant.isSubmitted ? '완료' : '미완료'}
           </Text>
         </_TBody>
       ))}
